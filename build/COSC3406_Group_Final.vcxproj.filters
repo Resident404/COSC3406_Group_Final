@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\asteroid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\resource.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\resource_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\scene_graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\scene_node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\asteroid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\resource_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\scene_graph.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\scene_node.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\material_vp.glsl" />
+    <None Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\material_fp.glsl" />
+    <None Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\shiny_blue_vp.glsl" />
+    <None Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\shiny_blue_fp.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{779FF1D9-722B-3455-AF89-A53D0395E300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{59D8796C-5AAE-3EAB-8B2B-EB9576756695}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
