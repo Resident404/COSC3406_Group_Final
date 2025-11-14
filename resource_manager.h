@@ -35,6 +35,8 @@ namespace game {
             void CreateTorus(std::string object_name, float loop_radius = 0.6, float circle_radius = 0.2, int num_loop_samples = 90, int num_circle_samples = 30);
             // Create a sphere
             void CreateSphere(std::string object_name, float radius = 0.6, int num_samples_theta = 90, int num_samples_phi = 45);
+            // Create cylindrical geometry
+            void CreateCylindricalGeometry(std::string object_name, float top_radius = 0.5, float bottom_radius = 0.5, float height = 0.5, int linear_samples = 7, int circle_samples = 32);
             // Create cube centered at (0, 0, 0) with sides of length 1
             void CreateCube(std::string object_name);
 

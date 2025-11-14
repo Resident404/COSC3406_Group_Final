@@ -54,8 +54,14 @@ namespace game {
             // Camera abstraction
             Camera camera_;
 
+            // Root of scene hierarchy
+            SceneNode* root_;
+
             // Flag to turn animation on/off
             bool animating_;
+
+            // Player capsule parts
+            SceneNode *topSphere_, *bottomSphere_, *middleCylinder_;
 
             // Mechanical arm
             SceneNode *arm1_, *arm2_, *claw1_, *claw2_, *orbit_arm2_, *orbit_claw1_, *orbit_claw2_;

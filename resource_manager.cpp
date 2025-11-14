@@ -355,6 +355,161 @@ void ResourceManager::CreateSphere(std::string object_name, float radius, int nu
 }
 
 
+void ResourceManager::CreateCylindricalGeometry(std::string object_name, float top_radius, float bottom_radius, float height, int linear_samples, int circle_samples) {
+
+    if (linear_samples < 2) { linear_samples = 2; }
+
+    //Specify the number of vertices and faces that will be created. This is done to determine how big the buffers must be for the model.
+    const GLuint vertex_num = linear_samples * circle_samples + 2;
+    const GLuint face_num = linear_samples * circle_samples * 2 + (circle_samples * 2);
+
+    //Specify the number of attributes each vertex and face will have. Again, this is used to determine the size of the buffers for the model.
+    const int vertex_att = 11;
+    const int face_att = 3;
+
+    //Get some pointers ready for the data of our buffers.
+    GLfloat* vertex = NULL;
+    GLuint* face = NULL;
+
+    //Try to allocate the memory for buffers of the model.
+    try {
+        vertex = new GLfloat[vertex_num * vertex_att];
+        face = new GLuint[face_num * face_att];
+    }
+    catch (std::exception& e) {
+        throw e;
+    }
+
+    //Create vertices
+    float theta; //Angle increment between points along the circumference of a circle.
+    glm::vec3 circle_center;
+    glm::vec3 vertex_position;
+    glm::vec3 vertex_normal;
+    glm::vec3 vertex_color;
+    glm::vec2 vertex_coord;
+
+    for (int i = 0; i < linear_samples; i++) { //Iterate along the line our cylinder will be made along.
+
+        circle_center = glm::vec3(0, height * (((float)i / (linear_samples - 1)) - 0.5), 0);         //The starting point of the line at the center of the cylinder.
+
+        for (int j = 0; j < circle_samples; j++) {  //For creating the vertices of each circle centered at each point along the line of the cylinder.
+
+            theta = 2 * glm::pi<GLfloat>() * j / circle_samples;
+
+            //interpolated value for different top and bottom radii
+            //radius = ((((float)i / (linear_samples - 1)) * top_radius) + ((1 - ((float)i / (linear_samples - 1))) * bottom_radius))
+            // Define position, normal and color of vertex for point along the circumference of the current circle.
+            vertex_normal = glm::vec3(((((float)i / (linear_samples - 1)) * top_radius) + ((1 - ((float)i / (linear_samples - 1))) * bottom_radius)) * cos(theta),
+                0,
+                ((((float)i / (linear_samples - 1)) * top_radius) + ((1 - ((float)i / (linear_samples - 1))) * bottom_radius)) * sin(theta));
+            vertex_position = circle_center + vertex_normal * ((((float)i / (linear_samples - 1)) * top_radius) + ((1 - ((float)i / (linear_samples - 1))) * bottom_radius));
+            //vertex_position = glm::vec3(vertex_normal.x * ((((float)i / (linear_samples - 1)) * top_radius) + ((1 - ((float)i / (linear_samples - 1))) * bottom_radius)),
+            //                            vertex_normal.y * ((((float)i / (linear_samples - 1)) * top_radius) + ((1 - ((float)i / (linear_samples - 1))) * bottom_radius)),
+            //                            vertex_normal.z * ((((float)i / (linear_samples - 1)) * top_radius) + ((1 - ((float)i / (linear_samples - 1))) * bottom_radius)));
+            vertex_color = glm::vec3(1.0 - ((float)i / (float)linear_samples),
+                (float)i / (float)linear_samples,
+                (float)j / (float)circle_samples);
+            vertex_coord = glm::vec2(theta / 2.0 * glm::pi<GLfloat>(), i);
+
+            // Add vectors to the data buffer.
+            for (int k = 0; k < 3; k++) {
+                vertex[(i * circle_samples + j) * vertex_att + k + 0] = vertex_position[k]; //3D position     (3)
+                vertex[(i * circle_samples + j) * vertex_att + k + 3] = vertex_normal[k];   //3D normal       (3)
+                vertex[(i * circle_samples + j) * vertex_att + k + 6] = vertex_color[k];    //RGB color       (3)
+            }
+            vertex[(i * circle_samples + j) * vertex_att + 9] = vertex_coord[0];        //Texture coord x (1)
+            vertex[(i * circle_samples + j) * vertex_att + 10] = vertex_coord[1];       //Texture coord y (1)
+        }
+    }
+
+    //End caps
+    //bottom center data
+    vertex_normal = glm::vec3(0., -1., 0.);
+    vertex_position = glm::vec3(0, height * ((0 / (linear_samples - 1)) - 0.5), 0);
+    vertex_color = glm::vec3(1.0 - (0. / (float)linear_samples),
+        0. / (float)linear_samples,
+        0. / (float)circle_samples);
+    vertex_coord = glm::vec2(0, 0);
+
+    //add the bottom center's vertex to vertex data.
+    for (int k = 0; k < 3; k++) {
+        vertex[((linear_samples - 1) * circle_samples + (circle_samples - 1)) * vertex_att + vertex_att + k + 0] = vertex_position[k];
+        vertex[((linear_samples - 1) * circle_samples + (circle_samples - 1)) * vertex_att + vertex_att + k + 3] = vertex_normal[k];
+        vertex[((linear_samples - 1) * circle_samples + (circle_samples - 1)) * vertex_att + vertex_att + k + 6] = vertex_color[k];
+    }
+    vertex[((linear_samples - 1) * circle_samples + (circle_samples - 1)) * vertex_att + vertex_att + 9] = vertex_coord[0];
+    vertex[(((int)-1) * circle_samples + (circle_samples - 1)) * vertex_att + vertex_att + 10] = vertex_coord[1];
+
+    //top center data
+    vertex_normal = glm::vec3(0., -1., 0.);
+    vertex_position = glm::vec3(0, height * (((linear_samples - 1) / (linear_samples - 1)) - 0.5), 0);
+    vertex_color = glm::vec3(1.0 - (((float)linear_samples - 1) / (float)linear_samples),
+        ((float)linear_samples - 1) / (float)linear_samples,
+        ((float)circle_samples - 1) / (float)circle_samples);
+    vertex_coord = glm::vec2(1, 1);
+
+    //add the top center's vertex to vertex data.
+    for (int k = 0; k < 3; k++) {
+        vertex[((linear_samples - 1) * circle_samples + (circle_samples - 1)) * vertex_att + (vertex_att * 2) + k + 0] = vertex_position[k];
+        vertex[((linear_samples - 1) * circle_samples + (circle_samples - 1)) * vertex_att + (vertex_att * 2) + k + 3] = vertex_normal[k];
+        vertex[((linear_samples - 1) * circle_samples + (circle_samples - 1)) * vertex_att + (vertex_att * 2) + k + 6] = vertex_color[k];
+    }
+    vertex[((linear_samples - 1) * circle_samples + (circle_samples - 1)) * vertex_att + (vertex_att * 2) + 9] = vertex_coord[0];
+    vertex[((linear_samples - 1) * circle_samples + (circle_samples - 1)) * vertex_att + (vertex_att * 2) + 10] = vertex_coord[1];
+
+    //Create triangles
+    for (int i = 0; i < linear_samples; i++) {
+        for (int j = 0; j < circle_samples; j++) {
+            // Two triangles per quad
+            glm::vec3 t1(((i + 1) % linear_samples) * circle_samples + j,   //Describes where the first triangle is located in the buffer.
+                i * circle_samples + ((j + 1) % circle_samples),
+                i * circle_samples + j);
+            glm::vec3 t2(((i + 1) % linear_samples) * circle_samples + j,   //Describes where the second triangle is located in the buffer.
+                ((i + 1) % linear_samples) * circle_samples + ((j + 1) % circle_samples),
+                i * circle_samples + ((j + 1) % circle_samples));
+            // Add two triangles to the data buffer
+            for (int k = 0; k < 3; k++) {
+                face[(i * circle_samples + j) * face_att * 2 + k + face_att] = (GLuint)t2[k];
+                face[(i * circle_samples + j) * face_att * 2 + k] = (GLuint)t1[k];
+            }
+
+            //Create triangles for end caps of cylinder.
+            if (i == linear_samples - 1 && j == circle_samples - 1) {
+                for (int g = 0; g < circle_samples; g++) {
+                    glm::vec3 t3((g + 1) % circle_samples,
+                        linear_samples * circle_samples,
+                        g);
+                    glm::vec3 t4(linear_samples * circle_samples + 1,
+                        ((linear_samples - 1) * circle_samples) + ((g + 1) % circle_samples),
+                        ((linear_samples - 1) * circle_samples) + g);
+                    //Add the triangles to the buffer accounting for some offset. (triangles fo caps are stored at the end of the buffer)
+                    for (int k = 0; k < 3; k++) {
+                        face[((linear_samples - 1) * circle_samples + (circle_samples - 1) + g) * face_att * 2 + k + (face_att * 2)] = (GLuint)t4[k];
+                        face[((linear_samples - 1) * circle_samples + (circle_samples - 1) + g) * face_att * 2 + k + (face_att)] = (GLuint)t3[k];
+                    }
+                }
+            }
+        }
+    }
+
+    // Create OpenGL buffers and copy data
+    GLuint vbo, ebo;
+    glGenBuffers(1, &vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, vertex_num * vertex_att * sizeof(GLfloat), vertex, GL_STATIC_DRAW);
+
+    glGenBuffers(1, &ebo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, face_num * face_att * sizeof(GLuint), face, GL_STATIC_DRAW);
+
+    // Free data buffers
+    delete[] vertex;
+    delete[] face;
+
+    // Create resource
+    AddResource(Mesh, object_name, vbo, ebo, face_num * face_att);
+}
+
 // Create the geometry for a cube centered at (0, 0, 0) with sides of length 1
 void ResourceManager::CreateCube(std::string object_name){
 
