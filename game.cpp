@@ -20,8 +20,8 @@ const bool window_full_screen_g = false;
 float camera_near_clip_distance_g = 0.01;
 float camera_far_clip_distance_g = 1000.0;
 float camera_fov_g = 20.0; // Field-of-view of camera (Default = 20)
-const glm::vec3 viewport_background_color_g(0.0, 0.0, 0.0);
-glm::vec3 camera_position_g(0.0, 0.0, 15.0); //(Default = (0.0, 0.0, 50.0))
+const glm::vec3 viewport_background_color_g(0.23, 0.38, 0.47); //Default = (0.0, 0.0, 0.0)
+glm::vec3 camera_position_g(0.0, 0.0, 10.0); //Default = (0.0, 0.0, 50.0)
 glm::vec3 camera_look_at_g(0.0, 0.0, 0.0);
 glm::vec3 camera_up_g(0.0, 1.0, 0.0);
 
