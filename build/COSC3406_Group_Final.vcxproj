@@ -279,6 +279,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="player.cpp" />
     <ClInclude Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\asteroid.h" />
     <ClInclude Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\camera.h" />
     <ClInclude Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\game.h" />

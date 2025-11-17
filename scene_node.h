@@ -57,6 +57,8 @@ namespace game {
             GLsizei GetSize(void) const;
             GLuint GetMaterial(void) const;
 
+            void ToggleShouldDraw();
+
             // Hierarchy-related methods
             void AddChild(SceneNode *node);
             std::vector<SceneNode *>::const_iterator children_begin() const;
@@ -73,6 +75,8 @@ namespace game {
             glm::quat orientation_; // Orientation of node
             glm::vec3 scale_; // Scale of node
  
+            bool shouldDraw_ = true;
+
             // Hierarchy
             SceneNode *parent_;
             std::vector<SceneNode *> children_;

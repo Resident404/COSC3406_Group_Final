@@ -25,6 +25,9 @@
     <ClCompile Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\scene_node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\asteroid.h">

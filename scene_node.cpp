@@ -226,6 +226,14 @@ glm::mat4 SceneNode::SetupShader(GLuint program, glm::mat4 parent_transf){
 }
 
 
+void SceneNode::ToggleShouldDraw() {
+    this->shouldDraw_ = (this->shouldDraw_ == true) ? false : true;
+    for (SceneNode* child : children_) {
+        child->ToggleShouldDraw(); //Toggle shouldDraw_ for all of the parent's children (and children's children)
+    }
+}
+
+
 void SceneNode::AddChild(SceneNode *node){
 
     children_.push_back(node);

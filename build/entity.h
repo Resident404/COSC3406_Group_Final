@@ -1,5 +1,8 @@
 #pragma once
 
+//FOR THE MOMENT THIS "CLASS" IS NOT USED
+//KEEPING THIS IN INCASE WE NEED TO PIVOT
+
 #include <string>
 #define GLEW_STATIC
 #include <GL/glew.h>
