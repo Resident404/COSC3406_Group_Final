@@ -11,6 +11,8 @@
 #include "resource_manager.h"
 #include "camera.h"
 #include "asteroid.h"
+#include "build/player.h"
+#include "build/obstacle.h"
 
 namespace game {
 
@@ -62,6 +64,8 @@ namespace game {
 
             // Player capsule parts
             SceneNode *topSphere_, *bottomSphere_, *middleCylinder_;
+
+            Obstacle *testObstacle_;
 
             // Mechanical arm
             SceneNode *arm1_, *arm2_, *claw1_, *claw2_, *orbit_arm2_, *orbit_claw1_, *orbit_claw2_;

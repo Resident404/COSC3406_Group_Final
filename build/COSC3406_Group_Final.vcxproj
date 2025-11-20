@@ -279,6 +279,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="obstacle.cpp" />
     <ClCompile Include="player.cpp" />
     <ClInclude Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\asteroid.h" />
     <ClInclude Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\camera.h" />
@@ -297,6 +298,7 @@
     <ClCompile Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\scene_node.cpp" />
     <ClInclude Include="enemy_type1.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="obstacle.h" />
     <ClInclude Include="player.h" />
     <None Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\material_vp.glsl">
     </None>

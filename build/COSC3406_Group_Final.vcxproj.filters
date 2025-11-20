@@ -28,6 +28,9 @@
     <ClCompile Include="player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="obstacle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\Users\Randi\Documents\Classes\6 - Semester 7\COSC 3406\DashJumpHackSlash\COSC3406_Group_Final\asteroid.h">
@@ -58,6 +61,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="enemy_type1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="obstacle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

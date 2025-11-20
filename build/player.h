@@ -16,7 +16,7 @@ namespace game {
 		//  should the player and enemies inherit from SceneNode AND Entity???
 
 	public:
-		Player(const std::string name, const Resource* geometry, const Resource* material); //How do parent class constructors get called?
+		Player(const std::string name, const Resource* geometry, const Resource* material);
 		~Player();
 
 		glm::vec3 GetForward(void);   //May not need these...

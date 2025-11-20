@@ -12,17 +12,17 @@ namespace game {
 
 // Main window settings
 const std::string window_title_g = "Demo";
-const unsigned int window_width_g = 800;
-const unsigned int window_height_g = 600;
+const unsigned int window_width_g = 1200;
+const unsigned int window_height_g = 1400;
 const bool window_full_screen_g = false;
 
 // Viewport and camera settings
 float camera_near_clip_distance_g = 0.01;
 float camera_far_clip_distance_g = 1000.0;
-float camera_fov_g = 20.0; // Field-of-view of camera (Default = 20)
+float camera_fov_g = 30.0; // Field-of-view of camera (Default = 20)
 const glm::vec3 viewport_background_color_g(0.23, 0.38, 0.47); //Default = (0.0, 0.0, 0.0)
-glm::vec3 camera_position_g(0.0, 0.0, 10.0); //Default = (0.0, 0.0, 50.0)
-glm::vec3 camera_look_at_g(0.0, 0.0, 0.0);
+glm::vec3 camera_position_g(0.0, 3.5, 7.0); //Default = (0.0, 0.0, 50.0)
+glm::vec3 camera_look_at_g(0.0, 0.0, -2.0);
 glm::vec3 camera_up_g(0.0, 1.0, 0.0);
 
 // Materials 
@@ -145,6 +145,18 @@ void Game::SetupScene(void){
     topSphere_->Translate(glm::vec3(0.0,0.25,0.0));
     topSphere_->Scale(glm::vec3(0.415, 0.415, 0.415));
 
+    SceneNode* laneGuide = CreateInstance("laneGuide", "CubeMesh", "ObjectMaterial");
+    laneGuide->Translate(glm::vec3(0.0,0.0,-5.0));
+    laneGuide->Scale(glm::vec3(0.9,0.01,10.0));
+
+    SceneNode* laneGuide2 = CreateInstance("laneGuide2", "CubeMesh", "ObjectMaterial");
+    laneGuide2->Translate(glm::vec3(0.9, 0.0, -5.0));
+    laneGuide2->Scale(glm::vec3(0.9, 0.01, 10.0));
+
+    testObstacle_ = new Obstacle("testObstacle", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
+    testObstacle_->Translate(glm::vec3(0.0, 0.75, -1.5));
+    testObstacle_->Scale(glm::vec3(0.8, 1.2, 3.0));
+
 //    // Create mechanical arm parts
 //    arm1_ = CreateInstance("Arm1", "CubeMesh", "ObjectMaterial");
 //    arm1_->SetPosition(glm::vec3(2.0, 0.0, 0.0));
@@ -175,6 +187,9 @@ void Game::SetupScene(void){
 //    claw2_->SetScale(glm::vec3(3.0, 1.0, 1.0));
 
     // Create hierarchy of scene nodes for the mechanical arm parts
+    root_->AddChild(laneGuide);
+    root_->AddChild(laneGuide2);
+    root_->AddChild(testObstacle_);
     root_->AddChild(bottomSphere_);
     bottomSphere_->AddChild(middleCylinder_);
     middleCylinder_->AddChild(topSphere_);
