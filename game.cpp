@@ -413,7 +413,7 @@ void Game::MainLoop(void){
                             //std::cout << "obstacleZ - playerZ = " << obstacleZ - playerZ << std::endl;
 
                             if (playerZ > obstacleZ && obstacleZ > playerZ - 0.5) {
-                                std::cout << "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\nTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\nTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\n";
+                                //std::cout << "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\nTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\nTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\n";
                                 if (AABBcheck(player_root_, obstacles[i])) {
                                     player_root_->SetGeometry(resman_.GetResource("SphereMesh"));
                                     player_root_->SetShader(resman_.GetResource("RedMaterial"));
@@ -488,7 +488,7 @@ void Game::KeyCallback(GLFWwindow* window, int key, int scancode, int action, in
         if ((key == GLFW_KEY_LEFT || key == GLFW_KEY_A) && action == GLFW_PRESS){
             if (game->player_root_->currentLane_ > 0){
                 game->player_root_->currentLane_--;
-                std::cout << "Moving to LEFT lane " << game->player_root_->currentLane_ << std::endl;
+                //std::cout << "Moving to LEFT lane " << game->player_root_->currentLane_ << std::endl;
             }
         }
 
@@ -496,7 +496,7 @@ void Game::KeyCallback(GLFWwindow* window, int key, int scancode, int action, in
         if ((key == GLFW_KEY_RIGHT || key == GLFW_KEY_D) && action == GLFW_PRESS){
             if (game->player_root_->currentLane_ < 2){
                 game->player_root_->currentLane_++;
-                std::cout << "Moving to RIGHT lane " << game->player_root_->currentLane_ << std::endl;
+                //std::cout << "Moving to RIGHT lane " << game->player_root_->currentLane_ << std::endl;
             }
         }
 
@@ -505,7 +505,7 @@ void Game::KeyCallback(GLFWwindow* window, int key, int scancode, int action, in
             if (!game->player_root_->isJumping_){
                 game->player_root_->isJumping_ = true;
                 game->player_root_->jumpStartTime_ = glfwGetTime();
-                std::cout << "JUMP!" << std::endl;
+                //std::cout << "JUMP!" << std::endl;
             }
         }
     }

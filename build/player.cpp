@@ -97,6 +97,6 @@ namespace game {
 		// Update player position
 		SetPosition(glm::vec3(newX, newY, newZ));
 		SetScore(1);
-		std::cout << "current score is: " << GetScore() << std::endl;
+		//std::cout << "current score is: " << GetScore() << std::endl;
 	}
 }
