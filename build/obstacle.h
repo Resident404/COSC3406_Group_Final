@@ -28,6 +28,16 @@ namespace game {
 		void SetEndPoint(glm::vec3 endPoint);
 		glm::vec3 GetEndPoint(glm::vec3 endPoint);
 
+		void SetxMax(float xMaxIn);
+		float GetxMax();
+		void SetxMin(float xMinIn);
+		float GetxMin();
+
+		void SetyMax(float yMaxIn);
+		float GetyMax();
+		void SetyMin(float yMinIn);
+		float GetyMin();
+
 //Add additional member functions here as needed to increase functionality.
 
 		void Update(float deltaTime); //Signature may need to be changed depending on how movement is implemented.
@@ -45,10 +55,10 @@ namespace game {
 		float lifeTime_ = 0.0;
 
 		//AABB info
-		float xMax;
-		float xMin;
-		float yMax;
-		float yMin;
+		float xMax_;
+		float xMin_;
+		float yMax_;
+		float yMin_;
 
 		//Distance from z=0
 		float collisionCheckDistance;

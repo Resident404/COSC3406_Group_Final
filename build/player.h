@@ -26,15 +26,24 @@ namespace game {
 		bool GetCameraViewMode();
 		void ToggleCameraViewMode();
 
-		void GetScore();
-		int SetScore();
-		void GetHealth();
-		float SetHealth();
+		int GetScore();
+		void SetScore(int addScore);
+		float GetHealth();
+		void SetHealth();
 		void Attack();	//Should be used to throw bomb power up.
 
 		void SetPowerUpMode(std::string powerUp);//***Needs to be passed an argument to decide which powerUp effect to apply.
 												 //   A string should do just fine.
 
+		void SetxMax(float xMaxIn);
+		float GetxMax();
+		void SetxMin(float xMinIn);
+		float GetxMin();
+
+		void SetyMax(float yMaxIn);
+		float GetyMax();
+		void SetyMin(float yMinIn);
+		float GetyMin();
 		//Add additional member functions here as needed to increase functionality.
 
 		void Update(double deltaTime); //Signature may need to be changed depending on how movement is implemented.
@@ -49,8 +58,14 @@ namespace game {
 		glm::vec3 forward_;	//Initial forward vector
 		glm::vec3 side_;	//Initial side vector
 
+		//AABB info
+		float xMax_;
+		float xMin_;
+		float yMax_;
+		float yMin_;
+
 		float health_;	//Number of 'hits' before being caught.
-		int score_;		//Culmulative point total.
+		int score_ = 0;	//Culmulative point total.
 
 	public:
 		// Player movement state

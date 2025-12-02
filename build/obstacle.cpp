@@ -5,6 +5,9 @@ namespace game {
 
 	Obstacle::Obstacle(const std::string name, const Resource* geometry, const Resource* material) : SceneNode(name, geometry, material) {
 		//Set up geometry and material for the obstacle.
+
+		//Should also set up the aabb for the obstacle.
+		//  Needs to be able to be updated depending on which lane it's in.
 	}
 	Obstacle::~Obstacle() {};
 
@@ -16,6 +19,16 @@ namespace game {
 
 	void Obstacle::SetEndPoint(glm::vec3 endPoint) { endPoint_ = endPoint; }
 	glm::vec3 Obstacle::GetEndPoint(glm::vec3 endPoint) { return endPoint_; }
+
+	void Obstacle::SetxMax(float xMaxIn) { xMax_ = xMaxIn; }
+	float Obstacle::GetxMax() { return xMax_; }
+	void Obstacle::SetxMin(float xMinIn) { xMin_ = xMinIn; }
+	float Obstacle::GetxMin() { return xMin_; }
+
+	void Obstacle::SetyMax(float yMaxIn) { yMax_ = yMaxIn; }
+	float Obstacle::GetyMax() { return yMax_; }
+	void Obstacle::SetyMin(float yMinIn) { yMin_ = yMinIn; }
+	float Obstacle::GetyMin() { return yMin_; }
 
 	void Obstacle::Update(float deltaTime) {
 
@@ -48,7 +61,9 @@ return
 	a.max.x > b.min.x &&
 	a.min.x < b.max.x &&
 	a.max.y > b.min.y &&
-	a.min.y < b.max.y &&
+	a.min.y < b.max.y 
+
+					  &&
 	a.max.z > b.min.z &&
 	a.min.z < b.max.z
 

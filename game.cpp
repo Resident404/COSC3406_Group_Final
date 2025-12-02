@@ -123,6 +123,9 @@ void Game::SetupResources(void){
     // Load material to be applied to mechanical arm
     std::string filename = std::string(MATERIAL_DIRECTORY) + std::string("/shiny_blue");
     resman_.LoadResource(Material, "ObjectMaterial", filename.c_str());
+
+    filename = std::string(MATERIAL_DIRECTORY) + std::string("/red_material");
+    resman_.LoadResource(Material, "RedMaterial", filename.c_str());
 }
 
 
@@ -147,10 +150,19 @@ void Game::SetupScene(void){
     lane_divider_2_->SetPosition(glm::vec3(0.9, -0.4, -250.0));
     lane_divider_2_->SetScale(glm::vec3(0.15, 0.2, 500.0));  // Much thicker and taller!
 
+    SceneNode* playerAABB = CreateInstance("playerAABB", "CubeMesh", "ObjectMaterial");
+    playerAABB->SetPosition(glm::vec3(0.0, -0.4, 0.0));
+    playerAABB->SetScale(glm::vec3(0.7, 1., 0.3));
+
     // === 2. CREATE BLUE ROBOT PLAYER ===
     player_root_ = new Player("PlayerRoot", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
     player_root_->SetPosition(glm::vec3(0.0, 0.5, 0.0));  // Start in center lane
     player_root_->SetScale(glm::vec3(0.3, 0.3, 0.3));  // Head
+
+    player_root_->SetxMax( 0.35);
+    player_root_->SetxMin(-0.35);
+    player_root_->SetyMax( 0.18);
+    player_root_->SetyMin(-0.50);
 
     // Body (cylinder)
     player_body_ = CreateInstance("PlayerBody", "CylinderMesh", "ObjectMaterial");
@@ -185,12 +197,24 @@ void Game::SetupScene(void){
     obstacle1_->SetStartPoint(glm::vec3(-0.9, 0.6, -50.0));   // Start far ahead
     obstacle1_->SetEndPoint(glm::vec3(-0.9, 0.6, 50.0));      // End behind player (loops)
 
+    obstacle1_->SetxMax( 0.3);
+    obstacle1_->SetxMin(-0.3);
+    obstacle1_->SetyMax( 0.6);
+    obstacle1_->SetyMin(-0.6);
+
+
     // Obstacle 2: Center lane, full height
     obstacle2_ = new Obstacle("Obstacle2", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
     obstacle2_->SetPosition(glm::vec3(0.0, 0.6, -80.0));
     obstacle2_->SetScale(glm::vec3(0.6, 1.2, 0.6));
     obstacle2_->SetStartPoint(glm::vec3(0.0, 0.6, -80.0));
     obstacle2_->SetEndPoint(glm::vec3(0.0, 0.6, 50.0));
+
+    obstacle2_->SetxMax( 0.3);
+    obstacle2_->SetxMin(-0.3);
+    obstacle2_->SetyMax( 0.6);
+    obstacle2_->SetyMin(-0.6);
+
 
     // Obstacle 3: Right lane, full height
     obstacle3_ = new Obstacle("Obstacle3", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
@@ -199,12 +223,24 @@ void Game::SetupScene(void){
     obstacle3_->SetStartPoint(glm::vec3(0.9, 0.6, -110.0));
     obstacle3_->SetEndPoint(glm::vec3(0.9, 0.6, 50.0));
 
+    obstacle3_->SetxMax( 0.3);
+    obstacle3_->SetxMin(-0.3);
+    obstacle3_->SetyMax( 0.6);
+    obstacle3_->SetyMin(-0.6);
+
+
     // Obstacle 4: Center lane, HALF height - low jump
     obstacle4_ = new Obstacle("Obstacle4", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
     obstacle4_->SetPosition(glm::vec3(0.0, 0.3, -140.0));
     obstacle4_->SetScale(glm::vec3(0.6, 0.6, 0.6));  // Half size!
     obstacle4_->SetStartPoint(glm::vec3(0.0, 0.3, -140.0));
     obstacle4_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
+
+    obstacle4_->SetxMax( 0.3);
+    obstacle4_->SetxMin(-0.3);
+    obstacle4_->SetyMax( 0.3);
+    obstacle4_->SetyMin(-0.3);
+
 
     // Obstacle 5: Left lane, HALF height - low jump
     obstacle5_ = new Obstacle("Obstacle5", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
@@ -213,12 +249,24 @@ void Game::SetupScene(void){
     obstacle5_->SetStartPoint(glm::vec3(-0.9, 0.3, -170.0));
     obstacle5_->SetEndPoint(glm::vec3(-0.9, 0.3, 50.0));
 
+    obstacle5_->SetxMax( 0.3);
+    obstacle5_->SetxMin(-0.3);
+    obstacle5_->SetyMax( 0.3);
+    obstacle5_->SetyMin(-0.3);
+
+
     // Obstacle 6: Right lane, HALF height - low jump
     obstacle6_ = new Obstacle("Obstacle6", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
     obstacle6_->SetPosition(glm::vec3(0.9, 0.3, -200.0));
     obstacle6_->SetScale(glm::vec3(0.6, 0.6, 0.6));  // Half size!
     obstacle6_->SetStartPoint(glm::vec3(0.9, 0.3, -200.0));
     obstacle6_->SetEndPoint(glm::vec3(0.9, 0.3, 50.0));
+
+    obstacle6_->SetxMax( 0.3);
+    obstacle6_->SetxMin(-0.3);
+    obstacle6_->SetyMax( 0.3);
+    obstacle6_->SetyMin(-0.3);
+
 
     // Obstacle 7: Left lane, full height
     obstacle7_ = new Obstacle("Obstacle7", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
@@ -227,12 +275,24 @@ void Game::SetupScene(void){
     obstacle7_->SetStartPoint(glm::vec3(-0.9, 0.6, -230.0));
     obstacle7_->SetEndPoint(glm::vec3(-0.9, 0.6, 50.0));
 
+    obstacle7_->SetxMax( 0.3);
+    obstacle7_->SetxMin(-0.3);
+    obstacle7_->SetyMax( 0.6);
+    obstacle7_->SetyMin(-0.6);
+
+
     // Obstacle 8: Center lane, full height
     obstacle8_ = new Obstacle("Obstacle8", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
     obstacle8_->SetPosition(glm::vec3(0.0, 0.6, -260.0));
     obstacle8_->SetScale(glm::vec3(0.6, 1.2, 0.6));
     obstacle8_->SetStartPoint(glm::vec3(0.0, 0.6, -260.0));
     obstacle8_->SetEndPoint(glm::vec3(0.0, 0.6, 50.0));
+
+    obstacle8_->SetxMax( 0.3);
+    obstacle8_->SetxMin(-0.3);
+    obstacle8_->SetyMax( 0.6);
+    obstacle8_->SetyMin(-0.6);
+
 
     // Obstacle 9: Right lane, full height
     obstacle9_ = new Obstacle("Obstacle9", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
@@ -241,6 +301,12 @@ void Game::SetupScene(void){
     obstacle9_->SetStartPoint(glm::vec3(0.9, 0.6, -290.0));
     obstacle9_->SetEndPoint(glm::vec3(0.9, 0.6, 50.0));
 
+    obstacle9_->SetxMax( 0.3);
+    obstacle9_->SetxMin(-0.3);
+    obstacle9_->SetyMax( 0.6);
+    obstacle9_->SetyMin(-0.6);
+
+
     // Obstacle 10: Center lane, HALF height - low jump
     obstacle10_ = new Obstacle("Obstacle10", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
     obstacle10_->SetPosition(glm::vec3(0.0, 0.3, -320.0));
@@ -248,12 +314,19 @@ void Game::SetupScene(void){
     obstacle10_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
     obstacle10_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
 
+    obstacle10_->SetxMax( 0.3);
+    obstacle10_->SetxMin(-0.3);
+    obstacle10_->SetyMax( 0.3);
+    obstacle10_->SetyMin(-0.3);
+
+
     // === 4. BUILD SCENE HIERARCHY ===
     root_->AddChild(ground_plane_);
     root_->AddChild(lane_divider_1_);
     root_->AddChild(lane_divider_2_);
 
     root_->AddChild(player_root_);
+    //player_root_->AddChild(playerAABB);
     player_root_->AddChild(player_body_);
     player_root_->AddChild(player_left_arm_);
     player_root_->AddChild(player_right_arm_);
@@ -332,8 +405,30 @@ void Game::MainLoop(void){
                     for (int i = 0; i < 10; i++) {
                         if (obstacles[i]) {
                             float obstacleZ = obstacles[i]->GetPosition().z;
+
+                            // if (obstacleZ - playerZ <= 0) or somthin
+                            //    aabb collision check
+                            //std::cout << "playerZ = " << playerZ << std::endl;
+                            //std::cout << "obstacleZ = " << obstacleZ << std::endl;
+                            //std::cout << "obstacleZ - playerZ = " << obstacleZ - playerZ << std::endl;
+
+                            if (playerZ > obstacleZ && obstacleZ > playerZ - 0.5) {
+                                std::cout << "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\nTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\nTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\n";
+                                if (AABBcheck(player_root_, obstacles[i])) {
+                                    player_root_->SetGeometry(resman_.GetResource("SphereMesh"));
+                                    player_root_->SetShader(resman_.GetResource("RedMaterial"));
+                                    animating_ = false;
+                                    std::cout << "GAME OVER\nYour final score is: " << player_root_->GetScore() << std::endl;
+                                    //std::cout << "bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk\nbonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk\nbonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk\n";
+                                }
+                            }
+
                             // If obstacle has gone behind player, respawn it ahead
                             if (obstacleZ > playerZ + despawnThreshold) {
+                                if (obstacles[i] == obstacles[0]) {
+                                    //std::cout << "obstacle1_ just despawned! obstacle1_ just despawned! obstacle1_ just despawned! obstacle1_ just despawned!\n";
+                                }
+
                                 // Randomly assign to a lane
                                 int randomLane = rand() % 3;
                                 float x = lanePositions[randomLane];
@@ -345,10 +440,10 @@ void Game::MainLoop(void){
 
                                 // Respawn ahead of player
                                 float newZ = playerZ - respawnDistance - (rand() % 50);
-                                obstacles[i]->SetPosition(glm::vec3(x, y, newZ));
-                                obstacles[i]->SetScale(glm::vec3(0.6f, scaleY, 0.6f));
-                                obstacles[i]->SetStartPoint(glm::vec3(x, y, newZ));
-                                obstacles[i]->SetEndPoint(glm::vec3(x, y, playerZ + 50.0f));
+                                obstacles[i]->SetPosition(glm::vec3(x, obstacles[i]->GetPosition()[1], newZ));
+                                //obstacles[i]->SetScale(glm::vec3(0.6f, scaleY, 0.6f)); //Suspecting this will cause frustration with setting up AABBs
+                                obstacles[i]->SetStartPoint(glm::vec3(x, obstacles[i]->GetPosition()[1], newZ));
+                                obstacles[i]->SetEndPoint(glm::vec3(x, obstacles[i]->GetPosition()[1], playerZ + 50.0f));
                             }
                         }
                     }
@@ -501,6 +596,37 @@ SceneNode *Game::CreateInstance(std::string entity_name, std::string object_name
     // Create instance
     SceneNode *node = new SceneNode(entity_name, geom, mat);
     return node;
+}
+
+bool Game::AABBcheck(Player* player, Obstacle* obstacle) {
+    //std::cout << "Player xMax = " << player->GetPosition()[0] + player->GetxMax() << std::endl;
+    //std::cout << "Player xMin = " << player->GetPosition()[0] + player->GetxMin() << std::endl;
+    //std::cout << "Player yMax = " << player->GetPosition()[1] + player->GetyMax() << std::endl;
+    //std::cout << "Player yMin = " << player->GetPosition()[1] + player->GetyMin() << std::endl;
+    //
+    //std::cout << "Obstacle xMax = " << obstacle->GetPosition()[0] + obstacle->GetxMax() << std::endl;
+    //std::cout << "Obstacle xMin = " << obstacle->GetPosition()[0] + obstacle->GetxMin() << std::endl;
+    //std::cout << "Obstacle yMax = " << obstacle->GetPosition()[1] + obstacle->GetyMax() << std::endl;
+    //std::cout << "Obstacle yMin = " << obstacle->GetPosition()[1] + obstacle->GetyMin() << std::endl;
+    //
+    //std::cout << "------------------------" << std::endl;
+    //std::cout << "Obstacle xPos = " << obstacle->GetPosition()[0] << std::endl;
+    //std::cout << "Obstacle yPos = " << obstacle->GetPosition()[1] << std::endl;
+    //std::cout << "------------------------" << std::endl;
+
+    return player->GetPosition().x + player->GetxMax() > obstacle->GetPosition().x + obstacle->GetxMin() &&
+           player->GetPosition().x + player->GetxMin() < obstacle->GetPosition().x + obstacle->GetxMax() &&
+           player->GetPosition().y + player->GetyMax() > obstacle->GetPosition().y + obstacle->GetyMin() &&
+           player->GetPosition().y + player->GetyMin() < obstacle->GetPosition().y + obstacle->GetyMax();
+
+        /*
+        a.max.x > b.min.x&&
+        a.min.x < b.max.x&&
+        a.max.y > b.min.y&&
+        a.min.y < b.max.y&&
+        a.max.z > b.min.z&&
+        a.min.z < b.max.z
+        */
 }
 
 } // namespace game

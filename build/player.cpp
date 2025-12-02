@@ -47,6 +47,20 @@ namespace game {
 		return current_up;
 	}
 
+	int Player::GetScore() { return score_; }
+	void Player::SetScore(int addScore) { score_ += addScore; }
+
+	void Player::SetxMax(float xMaxIn) { xMax_ = xMaxIn; }
+	float Player::GetxMax() { return xMax_; }
+	void Player::SetxMin(float xMinIn) { xMin_ = xMinIn; }
+	float Player::GetxMin() { return xMin_; }
+
+	void Player::SetyMax(float yMaxIn) { yMax_ = yMaxIn; }
+	float Player::GetyMax() { return yMax_; }
+	void Player::SetyMin(float yMinIn) { yMin_ = yMinIn; }
+	float Player::GetyMin() { return yMin_; }
+
+
 
 	void Player::Update(double deltaTime) {
 		// Lane positions: Left = -0.9, Center = 0.0, Right = 0.9
@@ -82,5 +96,7 @@ namespace game {
 
 		// Update player position
 		SetPosition(glm::vec3(newX, newY, newZ));
+		SetScore(1);
+		std::cout << "current score is: " << GetScore() << std::endl;
 	}
 }

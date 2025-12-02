@@ -105,6 +105,8 @@ namespace game {
             // Create an instance of an object
             SceneNode *CreateInstance(std::string entity_name, std::string object_name, std::string material_name);
 
+            bool AABBcheck(Player* player, Obstacle* obstacle);
+
     }; // class Game
 
 } // namespace game

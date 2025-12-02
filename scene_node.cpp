@@ -234,6 +234,43 @@ void SceneNode::ToggleShouldDraw() {
 }
 
 
+void SceneNode::SetShader(Resource* material) {
+    if (material) {
+        if (material->GetType() != Material) {
+            throw(std::invalid_argument(std::string("Invalid type of material")));
+        }
+
+        material_ = material->GetResource();
+    }
+    else {
+        material_ = 0;
+    }
+}
+
+
+void SceneNode::SetGeometry(Resource* geometry) {
+    if (geometry) {
+        // Set geometry
+        if (geometry->GetType() == PointSet) {
+            mode_ = GL_POINTS;
+        }
+        else if (geometry->GetType() == Mesh) {
+            mode_ = GL_TRIANGLES;
+        }
+        else {
+            throw(std::invalid_argument(std::string("Invalid type of geometry")));
+        }
+
+        array_buffer_ = geometry->GetArrayBuffer();
+        element_array_buffer_ = geometry->GetElementArrayBuffer();
+        size_ = geometry->GetSize();
+    }
+    else {
+        array_buffer_ = 0;
+    }
+}
+
+
 void SceneNode::AddChild(SceneNode *node){
 
     children_.push_back(node);

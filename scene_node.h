@@ -59,6 +59,10 @@ namespace game {
 
             void ToggleShouldDraw();
 
+            void SetShader(Resource* material);
+            void SetGeometry(Resource* geometry);
+
+
             // Hierarchy-related methods
             void AddChild(SceneNode *node);
             std::vector<SceneNode *>::const_iterator children_begin() const;
@@ -76,6 +80,7 @@ namespace game {
             glm::vec3 scale_; // Scale of node
  
             bool shouldDraw_ = true;
+
 
             // Hierarchy
             SceneNode *parent_;
