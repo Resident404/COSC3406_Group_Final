@@ -42,6 +42,9 @@ SceneNode::SceneNode(const std::string name, const Resource *geometry, const Res
         material_ = 0;
     }
 
+    // Initialize texture to 0 (no texture)
+    texture_ = 0;
+
     // Other attributes
     scale_ = glm::vec3(1.0, 1.0, 1.0);
 
@@ -202,6 +205,16 @@ glm::mat4 SceneNode::SetupShader(GLuint program, glm::mat4 parent_transf){
     glVertexAttribPointer(tex_att, 2, GL_FLOAT, GL_FALSE, 11*sizeof(GLfloat), (void *) (9*sizeof(GLfloat)));
     glEnableVertexAttribArray(tex_att);
 
+    // Bind texture if one is set
+    if (texture_ > 0) {
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture_);
+        GLint texture_uniform = glGetUniformLocation(program, "texture_map");
+        if (texture_uniform >= 0) {
+            glUniform1i(texture_uniform, 0);
+        }
+    }
+
     // World transformation
     glm::mat4 scaling = glm::scale(glm::mat4(1.0), scale_);
     glm::mat4 rotation = glm::mat4_cast(orientation_);
@@ -268,6 +281,24 @@ void SceneNode::SetGeometry(Resource* geometry) {
     else {
         array_buffer_ = 0;
     }
+}
+
+
+void SceneNode::SetTexture(Resource* texture) {
+    if (texture) {
+        if (texture->GetType() != Texture) {
+            throw(std::invalid_argument(std::string("Invalid type of texture")));
+        }
+        texture_ = texture->GetResource();
+    }
+    else {
+        texture_ = 0;
+    }
+}
+
+
+GLuint SceneNode::GetTexture(void) const {
+    return texture_;
 }
 
 

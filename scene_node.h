@@ -61,6 +61,8 @@ namespace game {
 
             void SetShader(Resource* material);
             void SetGeometry(Resource* geometry);
+            void SetTexture(Resource* texture);
+            GLuint GetTexture(void) const;
 
 
             // Hierarchy-related methods
@@ -75,6 +77,7 @@ namespace game {
             GLenum mode_; // Type of geometry
             GLsizei size_; // Number of primitives in geometry
             GLuint material_; // Reference to shader program
+            GLuint texture_; // Reference to texture
             glm::vec3 position_; // Position of node
             glm::quat orientation_; // Orientation of node
             glm::vec3 scale_; // Scale of node

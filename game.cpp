@@ -126,6 +126,32 @@ void Game::SetupResources(void){
 
     filename = std::string(MATERIAL_DIRECTORY) + std::string("/red_material");
     resman_.LoadResource(Material, "RedMaterial", filename.c_str());
+
+    // Load textured material shader
+    filename = std::string(MATERIAL_DIRECTORY) + std::string("/textured_material");
+    resman_.LoadResource(Material, "TexturedMaterial", filename.c_str());
+
+    // Load textures for game objects
+    filename = std::string(MATERIAL_DIRECTORY) + std::string("/player_texture.png");
+    resman_.LoadResource(Texture, "PlayerTexture", filename.c_str());
+
+    filename = std::string(MATERIAL_DIRECTORY) + std::string("/ground_texture.png");
+    resman_.LoadResource(Texture, "GroundTexture", filename.c_str());
+
+    filename = std::string(MATERIAL_DIRECTORY) + std::string("/obstacle_texture.png");
+    resman_.LoadResource(Texture, "ObstacleTexture", filename.c_str());
+
+    filename = std::string(MATERIAL_DIRECTORY) + std::string("/lane_divider_texture.png");
+    resman_.LoadResource(Texture, "LaneDividerTexture", filename.c_str());
+
+    filename = std::string(MATERIAL_DIRECTORY) + std::string("/tree_texture.png");
+    resman_.LoadResource(Texture, "TreeTexture", filename.c_str());
+
+    filename = std::string(MATERIAL_DIRECTORY) + std::string("/building_texture.png");
+    resman_.LoadResource(Texture, "BuildingTexture", filename.c_str());
+
+    filename = std::string(MATERIAL_DIRECTORY) + std::string("/tunnel_texture.png");
+    resman_.LoadResource(Texture, "TunnelTexture", filename.c_str());
 }
 
 
@@ -137,27 +163,31 @@ void Game::SetupScene(void){
 
     // === 1. CREATE INFINITE GROUND AND LANE DIVIDERS ===
     // Make ground VERY LONG so it appears infinite
-    ground_plane_ = CreateInstance("Ground", "CubeMesh", "ObjectMaterial");
+    ground_plane_ = CreateInstance("Ground", "CubeMesh", "TexturedMaterial");
     ground_plane_->SetPosition(glm::vec3(0.0, -0.5, -250.0));  // Far ahead
     ground_plane_->SetScale(glm::vec3(3.0, 0.1, 500.0));  // 500 units long!
+    ground_plane_->SetTexture(resman_.GetResource("GroundTexture"));
 
     // BRIGHT WHITE lane dividers - THICKER and more visible!
-    lane_divider_1_ = CreateInstance("LeftDivider", "CubeMesh", "ObjectMaterial");
+    lane_divider_1_ = CreateInstance("LeftDivider", "CubeMesh", "TexturedMaterial");
     lane_divider_1_->SetPosition(glm::vec3(-0.9, -0.4, -250.0));
     lane_divider_1_->SetScale(glm::vec3(0.15, 0.2, 500.0));  // Much thicker and taller!
+    lane_divider_1_->SetTexture(resman_.GetResource("LaneDividerTexture"));
 
-    lane_divider_2_ = CreateInstance("RightDivider", "CubeMesh", "ObjectMaterial");
+    lane_divider_2_ = CreateInstance("RightDivider", "CubeMesh", "TexturedMaterial");
     lane_divider_2_->SetPosition(glm::vec3(0.9, -0.4, -250.0));
     lane_divider_2_->SetScale(glm::vec3(0.15, 0.2, 500.0));  // Much thicker and taller!
+    lane_divider_2_->SetTexture(resman_.GetResource("LaneDividerTexture"));
 
     SceneNode* playerAABB = CreateInstance("playerAABB", "CubeMesh", "ObjectMaterial");
     playerAABB->SetPosition(glm::vec3(0.0, -0.4, 0.0));
     playerAABB->SetScale(glm::vec3(0.7, 1., 0.3));
 
     // === 2. CREATE BLUE ROBOT PLAYER ===
-    player_root_ = new Player("PlayerRoot", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
+    player_root_ = new Player("PlayerRoot", resman_.GetResource("SphereMesh"), resman_.GetResource("TexturedMaterial"));
     player_root_->SetPosition(glm::vec3(0.0, 0.5, 0.0));  // Start in center lane
     player_root_->SetScale(glm::vec3(0.3, 0.3, 0.3));  // Head
+    player_root_->SetTexture(resman_.GetResource("PlayerTexture"));
 
     player_root_->SetxMax( 0.35);
     player_root_->SetxMin(-0.35);
@@ -165,37 +195,43 @@ void Game::SetupScene(void){
     player_root_->SetyMin(-0.50);
 
     // Body (cylinder)
-    player_body_ = CreateInstance("PlayerBody", "CylinderMesh", "ObjectMaterial");
+    player_body_ = CreateInstance("PlayerBody", "CylinderMesh", "TexturedMaterial");
     player_body_->SetPosition(glm::vec3(0.0, -0.4, 0.0));
     player_body_->SetScale(glm::vec3(0.25, 0.6, 0.25));
+    player_body_->SetTexture(resman_.GetResource("PlayerTexture"));
 
     // Arms
-    player_left_arm_ = CreateInstance("LeftArm", "CylinderMesh", "ObjectMaterial");
+    player_left_arm_ = CreateInstance("LeftArm", "CylinderMesh", "TexturedMaterial");
     player_left_arm_->SetPosition(glm::vec3(-0.35, -0.2, 0.0));
     player_left_arm_->SetScale(glm::vec3(0.1, 0.4, 0.1));
+    player_left_arm_->SetTexture(resman_.GetResource("PlayerTexture"));
 
-    player_right_arm_ = CreateInstance("RightArm", "CylinderMesh", "ObjectMaterial");
+    player_right_arm_ = CreateInstance("RightArm", "CylinderMesh", "TexturedMaterial");
     player_right_arm_->SetPosition(glm::vec3(0.35, -0.2, 0.0));
     player_right_arm_->SetScale(glm::vec3(0.1, 0.4, 0.1));
+    player_right_arm_->SetTexture(resman_.GetResource("PlayerTexture"));
 
     // Legs
-    player_left_leg_ = CreateInstance("LeftLeg", "CylinderMesh", "ObjectMaterial");
+    player_left_leg_ = CreateInstance("LeftLeg", "CylinderMesh", "TexturedMaterial");
     player_left_leg_->SetPosition(glm::vec3(-0.15, -0.9, 0.0));
     player_left_leg_->SetScale(glm::vec3(0.12, 0.5, 0.12));
+    player_left_leg_->SetTexture(resman_.GetResource("PlayerTexture"));
 
-    player_right_leg_ = CreateInstance("RightLeg", "CylinderMesh", "ObjectMaterial");
+    player_right_leg_ = CreateInstance("RightLeg", "CylinderMesh", "TexturedMaterial");
     player_right_leg_->SetPosition(glm::vec3(0.15, -0.9, 0.0));
     player_right_leg_->SetScale(glm::vec3(0.12, 0.5, 0.12));
+    player_right_leg_->SetTexture(resman_.GetResource("PlayerTexture"));
 
     // === 3. CREATE OBSTACLES IN DIFFERENT LANES ===
     // Obstacles start FAR ahead and move TOWARD player (loop infinitely)
 
     // Obstacle 1: Left lane, full height
-    obstacle1_ = new Obstacle("Obstacle1", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
+    obstacle1_ = new Obstacle("Obstacle1", resman_.GetResource("CubeMesh"), resman_.GetResource("TexturedMaterial"));
     obstacle1_->SetPosition(glm::vec3(-0.9, 0.6, -50.0));
     obstacle1_->SetScale(glm::vec3(0.6, 1.2, 0.6));
     obstacle1_->SetStartPoint(glm::vec3(-0.9, 0.6, -50.0));   // Start far ahead
     obstacle1_->SetEndPoint(glm::vec3(-0.9, 0.6, 50.0));      // End behind player (loops)
+    obstacle1_->SetTexture(resman_.GetResource("ObstacleTexture"));
 
     obstacle1_->SetxMax( 0.3);
     obstacle1_->SetxMin(-0.3);
@@ -204,11 +240,12 @@ void Game::SetupScene(void){
 
 
     // Obstacle 2: Center lane, full height
-    obstacle2_ = new Obstacle("Obstacle2", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
+    obstacle2_ = new Obstacle("Obstacle2", resman_.GetResource("CubeMesh"), resman_.GetResource("TexturedMaterial"));
     obstacle2_->SetPosition(glm::vec3(0.0, 0.6, -80.0));
     obstacle2_->SetScale(glm::vec3(0.6, 1.2, 0.6));
     obstacle2_->SetStartPoint(glm::vec3(0.0, 0.6, -80.0));
     obstacle2_->SetEndPoint(glm::vec3(0.0, 0.6, 50.0));
+    obstacle2_->SetTexture(resman_.GetResource("ObstacleTexture"));
 
     obstacle2_->SetxMax( 0.3);
     obstacle2_->SetxMin(-0.3);
@@ -217,11 +254,12 @@ void Game::SetupScene(void){
 
 
     // Obstacle 3: Right lane, full height
-    obstacle3_ = new Obstacle("Obstacle3", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
+    obstacle3_ = new Obstacle("Obstacle3", resman_.GetResource("CubeMesh"), resman_.GetResource("TexturedMaterial"));
     obstacle3_->SetPosition(glm::vec3(0.9, 0.6, -110.0));
     obstacle3_->SetScale(glm::vec3(0.6, 1.2, 0.6));
     obstacle3_->SetStartPoint(glm::vec3(0.9, 0.6, -110.0));
     obstacle3_->SetEndPoint(glm::vec3(0.9, 0.6, 50.0));
+    obstacle3_->SetTexture(resman_.GetResource("ObstacleTexture"));
 
     obstacle3_->SetxMax( 0.3);
     obstacle3_->SetxMin(-0.3);
@@ -230,11 +268,12 @@ void Game::SetupScene(void){
 
 
     // Obstacle 4: Center lane, HALF height - low jump
-    obstacle4_ = new Obstacle("Obstacle4", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
+    obstacle4_ = new Obstacle("Obstacle4", resman_.GetResource("CubeMesh"), resman_.GetResource("TexturedMaterial"));
     obstacle4_->SetPosition(glm::vec3(0.0, 0.3, -140.0));
     obstacle4_->SetScale(glm::vec3(0.6, 0.6, 0.6));  // Half size!
     obstacle4_->SetStartPoint(glm::vec3(0.0, 0.3, -140.0));
     obstacle4_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
+    obstacle4_->SetTexture(resman_.GetResource("ObstacleTexture"));
 
     obstacle4_->SetxMax( 0.3);
     obstacle4_->SetxMin(-0.3);
@@ -243,11 +282,12 @@ void Game::SetupScene(void){
 
 
     // Obstacle 5: Left lane, HALF height - low jump
-    obstacle5_ = new Obstacle("Obstacle5", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
+    obstacle5_ = new Obstacle("Obstacle5", resman_.GetResource("CubeMesh"), resman_.GetResource("TexturedMaterial"));
     obstacle5_->SetPosition(glm::vec3(-0.9, 0.3, -170.0));
     obstacle5_->SetScale(glm::vec3(0.6, 0.6, 0.6));  // Half size!
     obstacle5_->SetStartPoint(glm::vec3(-0.9, 0.3, -170.0));
     obstacle5_->SetEndPoint(glm::vec3(-0.9, 0.3, 50.0));
+    obstacle5_->SetTexture(resman_.GetResource("ObstacleTexture"));
 
     obstacle5_->SetxMax( 0.3);
     obstacle5_->SetxMin(-0.3);
@@ -256,11 +296,12 @@ void Game::SetupScene(void){
 
 
     // Obstacle 6: Right lane, HALF height - low jump
-    obstacle6_ = new Obstacle("Obstacle6", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
+    obstacle6_ = new Obstacle("Obstacle6", resman_.GetResource("CubeMesh"), resman_.GetResource("TexturedMaterial"));
     obstacle6_->SetPosition(glm::vec3(0.9, 0.3, -200.0));
     obstacle6_->SetScale(glm::vec3(0.6, 0.6, 0.6));  // Half size!
     obstacle6_->SetStartPoint(glm::vec3(0.9, 0.3, -200.0));
     obstacle6_->SetEndPoint(glm::vec3(0.9, 0.3, 50.0));
+    obstacle6_->SetTexture(resman_.GetResource("ObstacleTexture"));
 
     obstacle6_->SetxMax( 0.3);
     obstacle6_->SetxMin(-0.3);
@@ -269,11 +310,12 @@ void Game::SetupScene(void){
 
 
     // Obstacle 7: Left lane, full height
-    obstacle7_ = new Obstacle("Obstacle7", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
+    obstacle7_ = new Obstacle("Obstacle7", resman_.GetResource("CubeMesh"), resman_.GetResource("TexturedMaterial"));
     obstacle7_->SetPosition(glm::vec3(-0.9, 0.6, -230.0));
     obstacle7_->SetScale(glm::vec3(0.6, 1.2, 0.6));
     obstacle7_->SetStartPoint(glm::vec3(-0.9, 0.6, -230.0));
     obstacle7_->SetEndPoint(glm::vec3(-0.9, 0.6, 50.0));
+    obstacle7_->SetTexture(resman_.GetResource("ObstacleTexture"));
 
     obstacle7_->SetxMax( 0.3);
     obstacle7_->SetxMin(-0.3);
@@ -282,11 +324,12 @@ void Game::SetupScene(void){
 
 
     // Obstacle 8: Center lane, full height
-    obstacle8_ = new Obstacle("Obstacle8", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
+    obstacle8_ = new Obstacle("Obstacle8", resman_.GetResource("CubeMesh"), resman_.GetResource("TexturedMaterial"));
     obstacle8_->SetPosition(glm::vec3(0.0, 0.6, -260.0));
     obstacle8_->SetScale(glm::vec3(0.6, 1.2, 0.6));
     obstacle8_->SetStartPoint(glm::vec3(0.0, 0.6, -260.0));
     obstacle8_->SetEndPoint(glm::vec3(0.0, 0.6, 50.0));
+    obstacle8_->SetTexture(resman_.GetResource("ObstacleTexture"));
 
     obstacle8_->SetxMax( 0.3);
     obstacle8_->SetxMin(-0.3);
@@ -295,11 +338,12 @@ void Game::SetupScene(void){
 
 
     // Obstacle 9: Right lane, full height
-    obstacle9_ = new Obstacle("Obstacle9", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
+    obstacle9_ = new Obstacle("Obstacle9", resman_.GetResource("CubeMesh"), resman_.GetResource("TexturedMaterial"));
     obstacle9_->SetPosition(glm::vec3(0.9, 0.6, -290.0));
     obstacle9_->SetScale(glm::vec3(0.6, 1.2, 0.6));
     obstacle9_->SetStartPoint(glm::vec3(0.9, 0.6, -290.0));
     obstacle9_->SetEndPoint(glm::vec3(0.9, 0.6, 50.0));
+    obstacle9_->SetTexture(resman_.GetResource("ObstacleTexture"));
 
     obstacle9_->SetxMax( 0.3);
     obstacle9_->SetxMin(-0.3);
@@ -308,11 +352,12 @@ void Game::SetupScene(void){
 
 
     // Obstacle 10: Center lane, HALF height - low jump
-    obstacle10_ = new Obstacle("Obstacle10", resman_.GetResource("CubeMesh"), resman_.GetResource("ObjectMaterial"));
+    obstacle10_ = new Obstacle("Obstacle10", resman_.GetResource("CubeMesh"), resman_.GetResource("TexturedMaterial"));
     obstacle10_->SetPosition(glm::vec3(0.0, 0.3, -320.0));
     obstacle10_->SetScale(glm::vec3(0.6, 0.6, 0.6));  // Half size!
     obstacle10_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
     obstacle10_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
+    obstacle10_->SetTexture(resman_.GetResource("ObstacleTexture"));
 
     obstacle10_->SetxMax( 0.3);
     obstacle10_->SetxMin(-0.3);

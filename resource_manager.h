@@ -42,11 +42,13 @@ namespace game {
 
         private:
             // List storing all resources
-            std::vector<Resource*> resource_; 
- 
+            std::vector<Resource*> resource_;
+
             // Methods to load specific types of resources
             // Load shaders programs
             void LoadMaterial(const std::string name, const char *prefix);
+            // Load a texture from an image file
+            void LoadTexture(const std::string name, const char *filename);
             // Load a text file into memory (could be source code)
             std::string LoadTextFile(const char *filename);
 

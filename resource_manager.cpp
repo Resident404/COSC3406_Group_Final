@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <SOIL/SOIL.h>
 
 #include "resource_manager.h"
 
@@ -42,6 +43,8 @@ void ResourceManager::LoadResource(ResourceType type, const std::string name, co
     // Call appropriate method depending on type of resource
     if (type == Material){
         LoadMaterial(name, filename);
+    } else if (type == Texture){
+        LoadTexture(name, filename);
     } else {
         throw(std::invalid_argument(std::string("Invalid type of resource")));
     }
@@ -144,6 +147,37 @@ std::string ResourceManager::LoadTextFile(const char *filename){
     f.close();
 
     return content;
+}
+
+
+void ResourceManager::LoadTexture(const std::string name, const char *filename){
+
+    // Load image from file using SOIL
+    int width, height;
+    unsigned char* image = SOIL_load_image(filename, &width, &height, 0, SOIL_LOAD_RGBA);
+    if (!image){
+        throw(std::ios_base::failure(std::string("Error loading texture file: ")+std::string(filename)+std::string(" - ")+std::string(SOIL_last_result())));
+    }
+
+    // Create OpenGL texture
+    GLuint texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    // Upload texture data
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+
+    // Set texture parameters
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    // Free image data
+    SOIL_free_image_data(image);
+
+    // Add texture resource
+    AddResource(Texture, name, texture, 0);
 }
 
 
