@@ -30,6 +30,8 @@ namespace game {
 	void Obstacle::SetyMin(float yMinIn) { yMin_ = yMinIn; }
 	float Obstacle::GetyMin() { return yMin_; }
 
+	int Obstacle::GetScoreValue() { return scoreValue; }
+
 	void Obstacle::Update(float deltaTime) {
 
 		//Logic for controlling the obstacles position.

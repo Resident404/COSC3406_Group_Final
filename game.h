@@ -84,6 +84,12 @@ namespace game {
             Obstacle *obstacle9_;
             Obstacle *obstacle10_;
 
+            Obstacle *coin1_;
+            Obstacle *coin2_;
+            Obstacle *coin3_;
+            Obstacle *coin4_;
+            Obstacle *coin5_;
+
             // Mechanical arm
             SceneNode *arm1_, *arm2_, *claw1_, *claw2_, *orbit_arm2_, *orbit_claw1_, *orbit_claw2_;
 

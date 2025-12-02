@@ -38,6 +38,8 @@ namespace game {
 		void SetyMin(float yMinIn);
 		float GetyMin();
 
+		int GetScoreValue();
+
 //Add additional member functions here as needed to increase functionality.
 
 		void Update(float deltaTime); //Signature may need to be changed depending on how movement is implemented.
@@ -59,6 +61,8 @@ namespace game {
 		float xMin_;
 		float yMax_;
 		float yMin_;
+
+		int scoreValue = 10;
 
 		//Distance from z=0
 		float collisionCheckDistance;

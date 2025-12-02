@@ -365,6 +365,65 @@ void Game::SetupScene(void){
     obstacle10_->SetyMin(-0.3);
 
 
+    coin1_ = new Obstacle("Coin1", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
+    coin1_->SetPosition(glm::vec3(0.0, 0.6, -50.0));
+    coin1_->SetScale(glm::vec3(0.3, 0.3, 0.6));
+    coin1_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
+    coin1_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
+
+    coin1_->SetxMax(0.3);
+    coin1_->SetxMin(-0.3);
+    coin1_->SetyMax(0.3);
+    coin1_->SetyMin(-0.3);
+
+
+    coin2_ = new Obstacle("Coin2", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
+    coin2_->SetPosition(glm::vec3(0.9, 0.6, -80.0));
+    coin2_->SetScale(glm::vec3(0.3, 0.3, 0.6));
+    coin2_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
+    coin2_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
+
+    coin2_->SetxMax(0.3);
+    coin2_->SetxMin(-0.3);
+    coin2_->SetyMax(0.3);
+    coin2_->SetyMin(-0.3);
+
+
+    coin3_ = new Obstacle("Coin3", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
+    coin3_->SetPosition(glm::vec3(-0.9, 0.6, -110.0));
+    coin3_->SetScale(glm::vec3(0.3, 0.3, 0.6));
+    coin3_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
+    coin3_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
+
+    coin3_->SetxMax(0.3);
+    coin3_->SetxMin(-0.3);
+    coin3_->SetyMax(0.3);
+    coin3_->SetyMin(-0.3);
+
+
+    coin4_ = new Obstacle("Coin4", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
+    coin4_->SetPosition(glm::vec3(-0.9, 0.6, -140.0));
+    coin4_->SetScale(glm::vec3(0.3, 0.3, 0.6));
+    coin4_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
+    coin4_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
+
+    coin4_->SetxMax(0.3);
+    coin4_->SetxMin(-0.3);
+    coin4_->SetyMax(0.3);
+    coin4_->SetyMin(-0.3);
+
+
+    coin5_ = new Obstacle("Coin4", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
+    coin5_->SetPosition(glm::vec3(0.9, 0.6, -170.0));
+    coin5_->SetScale(glm::vec3(0.3, 0.3, 0.6));
+    coin5_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
+    coin5_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
+
+    coin5_->SetxMax(0.3);
+    coin5_->SetxMin(-0.3);
+    coin5_->SetyMax(0.3);
+    coin5_->SetyMin(-0.3);
+
     // === 4. BUILD SCENE HIERARCHY ===
     root_->AddChild(ground_plane_);
     root_->AddChild(lane_divider_1_);
@@ -388,6 +447,12 @@ void Game::SetupScene(void){
     root_->AddChild(obstacle8_);
     root_->AddChild(obstacle9_);
     root_->AddChild(obstacle10_);
+
+    root_->AddChild(coin1_);
+    root_->AddChild(coin2_);
+    root_->AddChild(coin3_);
+    root_->AddChild(coin4_);
+    root_->AddChild(coin5_);
 
     scene_.SetRoot(root_);
 
@@ -444,10 +509,11 @@ void Game::MainLoop(void){
 
                     // Check each obstacle and respawn if needed
                     Obstacle* obstacles[] = {obstacle1_, obstacle2_, obstacle3_, obstacle4_, obstacle5_,
-                                            obstacle6_, obstacle7_, obstacle8_, obstacle9_, obstacle10_};
+                                            obstacle6_, obstacle7_, obstacle8_, obstacle9_, obstacle10_,
+                                            coin1_, coin2_, coin3_, coin4_, coin5_};
                     float lanePositions[] = {-0.9f, 0.0f, 0.9f};  // Left, Center, Right
 
-                    for (int i = 0; i < 10; i++) {
+                    for (int i = 0; i < 15; i++) {
                         if (obstacles[i]) {
                             float obstacleZ = obstacles[i]->GetPosition().z;
 
@@ -460,11 +526,29 @@ void Game::MainLoop(void){
                             if (playerZ > obstacleZ && obstacleZ > playerZ - 0.5) {
                                 //std::cout << "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\nTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\nTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\n";
                                 if (AABBcheck(player_root_, obstacles[i])) {
-                                    player_root_->SetGeometry(resman_.GetResource("SphereMesh"));
-                                    player_root_->SetShader(resman_.GetResource("RedMaterial"));
-                                    animating_ = false;
-                                    std::cout << "GAME OVER\nYour final score is: " << player_root_->GetScore() << std::endl;
-                                    //std::cout << "bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk\nbonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk\nbonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk\n";
+                                    if (i <= 9) {
+                                        player_root_->SetGeometry(resman_.GetResource("SphereMesh"));
+                                        player_root_->SetShader(resman_.GetResource("RedMaterial"));
+                                        animating_ = false;
+                                        std::cout << "GAME OVER\nYour final score is: " << player_root_->GetScore() << std::endl;
+                                        //std::cout << "bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk\nbonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk\nbonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk\n";
+                                    }
+                                    else {
+                                        player_root_->SetScore(obstacles[i]->GetScoreValue());
+                                        //std::cout << "Player just scored 10pts!!!\n";
+
+                                        // Randomly assign to a lane
+                                        int randomLane = rand() % 3;
+                                        float x = lanePositions[randomLane];
+
+                                        // Respawn ahead of player
+                                        float newZ = playerZ - respawnDistance - (rand() % 50);
+                                        obstacles[i]->SetPosition(glm::vec3(x, obstacles[i]->GetPosition()[1], newZ));
+                                        //obstacles[i]->SetScale(glm::vec3(0.6f, scaleY, 0.6f)); //Suspecting this will cause frustration with setting up AABBs
+                                        obstacles[i]->SetStartPoint(glm::vec3(x, obstacles[i]->GetPosition()[1], newZ));
+                                        obstacles[i]->SetEndPoint(glm::vec3(x, obstacles[i]->GetPosition()[1], playerZ + 50.0f));
+                                    }
+
                                 }
                             }
 
