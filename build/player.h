@@ -28,6 +28,7 @@ namespace game {
 
 		int GetScore();
 		void SetScore(int addScore);
+		void Reset();
 		float GetHealth();
 		void SetHealth();
 		void Attack();	//Should be used to throw bomb power up.
@@ -64,6 +65,8 @@ namespace game {
 		float yMax_;
 		float yMin_;
 
+		float forwardSpeed_ = 15.0f;
+		float forwardSpeedIncrease_ = 0.0025f;
 		float health_;	//Number of 'hits' before being caught.
 		int score_ = 0;	//Culmulative point total.
 

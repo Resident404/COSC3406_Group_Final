@@ -49,6 +49,7 @@ namespace game {
 
 	int Player::GetScore() { return score_; }
 	void Player::SetScore(int addScore) { score_ += addScore; }
+	void Player::Reset() { score_ = 0; forwardSpeed_ = 15.0f; }
 
 	void Player::SetxMax(float xMaxIn) { xMax_ = xMaxIn; }
 	float Player::GetxMax() { return xMax_; }
@@ -73,12 +74,12 @@ namespace game {
 		// Smooth lane switching (interpolate X position)
 		float newX = currentPos.x + (targetX_ - currentPos.x) * 8.0f * deltaTime;
 
-		// AUTOMATIC FORWARD MOVEMENT - Player runs forward FAST!
-		float forwardSpeed = 15.0f;  // Running speed (increased from 5 to 15!)
-		float newZ = currentPos.z - forwardSpeed * deltaTime;  // Move in negative Z direction
+		// AUTOMATIC FORWARD MOVEMENT
+		forwardSpeed_ += forwardSpeedIncrease_;
+		float newZ = currentPos.z - forwardSpeed_ * deltaTime;  // Move in negative Z direction
 
 		// Jump physics
-		float newY = 0.5f;  // Default standing height (raised from 0.25 to 0.5)
+		float newY = 0.5f;
 		if (isJumping_) {
 			double currentTime = glfwGetTime();
 			float timeSinceJump = currentTime - jumpStartTime_;
@@ -96,7 +97,7 @@ namespace game {
 
 		// Update player position
 		SetPosition(glm::vec3(newX, newY, newZ));
-		SetScore(1);
+		SetScore(1); //Each update tick increment the player's score by 1
 		//std::cout << "current score is: " << GetScore() << std::endl;
 	}
 }

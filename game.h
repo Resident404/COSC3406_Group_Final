@@ -72,23 +72,12 @@ namespace game {
             SceneNode *ground_plane_;
             SceneNode *lane_divider_1_, *lane_divider_2_;
 
-            // Multiple obstacles in different lanes - MORE obstacles!
-            Obstacle *obstacle1_;
-            Obstacle *obstacle2_;
-            Obstacle *obstacle3_;
-            Obstacle *obstacle4_;
-            Obstacle *obstacle5_;
-            Obstacle *obstacle6_;
-            Obstacle *obstacle7_;
-            Obstacle *obstacle8_;
-            Obstacle *obstacle9_;
-            Obstacle *obstacle10_;
+            Obstacle* obstacle1_, *obstacle2_, *obstacle3_, *obstacle4_, *obstacle5_, *obstacle6_, *obstacle7_, *obstacle8_, *obstacle9_, *obstacle10_;
 
-            Obstacle *coin1_;
-            Obstacle *coin2_;
-            Obstacle *coin3_;
-            Obstacle *coin4_;
-            Obstacle *coin5_;
+            Obstacle *coin1_, *coin2_, *coin3_, *coin4_, *coin5_;
+
+            Obstacle *treeTrunk1_, *treeTrunk2_, *treeTrunk3_, *treeTrunk4_, *treeTrunk5_, *treeTrunk6_, *treeTrunk7_, *treeTrunk8_, *treeTrunk9_, *treeTrunk10_;
+            SceneNode *treeTop1_, *treeTop2_, *treeTop3_, *treeTop4_, *treeTop5_, *treeTop6_, *treeTop7_, *treeTop8_, *treeTop9_, *treeTop10_;
 
             // Mechanical arm
             SceneNode *arm1_, *arm2_, *claw1_, *claw2_, *orbit_arm2_, *orbit_claw1_, *orbit_claw2_;

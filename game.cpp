@@ -159,24 +159,22 @@ void Game::SetupScene(void){
     scene_.SetBackgroundColor(viewport_background_color_g);
     root_ = CreateInstance("root", "", "");
 
-    std::cout << "Creating Subway Surfer game scene..." << std::endl;
-
     // === 1. CREATE INFINITE GROUND AND LANE DIVIDERS ===
     // Make ground VERY LONG so it appears infinite
     ground_plane_ = CreateInstance("Ground", "CubeMesh", "TexturedMaterial");
-    ground_plane_->SetPosition(glm::vec3(0.0, -0.5, -250.0));  // Far ahead
-    ground_plane_->SetScale(glm::vec3(3.0, 0.1, 500.0));  // 500 units long!
+    ground_plane_->SetPosition(glm::vec3(0.0, -0.5, -250.0));
+    ground_plane_->SetScale(glm::vec3(3.0, 0.1, 500.0));
     ground_plane_->SetTexture(resman_.GetResource("GroundTexture"));
 
     // BRIGHT WHITE lane dividers - THICKER and more visible!
     lane_divider_1_ = CreateInstance("LeftDivider", "CubeMesh", "TexturedMaterial");
     lane_divider_1_->SetPosition(glm::vec3(-0.9, -0.4, -250.0));
-    lane_divider_1_->SetScale(glm::vec3(0.15, 0.2, 500.0));  // Much thicker and taller!
+    lane_divider_1_->SetScale(glm::vec3(0.15, 0.2, 500.0));
     lane_divider_1_->SetTexture(resman_.GetResource("LaneDividerTexture"));
 
     lane_divider_2_ = CreateInstance("RightDivider", "CubeMesh", "TexturedMaterial");
     lane_divider_2_->SetPosition(glm::vec3(0.9, -0.4, -250.0));
-    lane_divider_2_->SetScale(glm::vec3(0.15, 0.2, 500.0));  // Much thicker and taller!
+    lane_divider_2_->SetScale(glm::vec3(0.15, 0.2, 500.0));
     lane_divider_2_->SetTexture(resman_.GetResource("LaneDividerTexture"));
 
     SceneNode* playerAABB = CreateInstance("playerAABB", "CubeMesh", "ObjectMaterial");
@@ -235,7 +233,7 @@ void Game::SetupScene(void){
 
     obstacle1_->SetxMax( 0.3);
     obstacle1_->SetxMin(-0.3);
-    obstacle1_->SetyMax( 0.6);
+    obstacle1_->SetyMax( 1.0);
     obstacle1_->SetyMin(-0.6);
 
 
@@ -249,7 +247,7 @@ void Game::SetupScene(void){
 
     obstacle2_->SetxMax( 0.3);
     obstacle2_->SetxMin(-0.3);
-    obstacle2_->SetyMax( 0.6);
+    obstacle2_->SetyMax( 1.0);
     obstacle2_->SetyMin(-0.6);
 
 
@@ -263,7 +261,7 @@ void Game::SetupScene(void){
 
     obstacle3_->SetxMax( 0.3);
     obstacle3_->SetxMin(-0.3);
-    obstacle3_->SetyMax( 0.6);
+    obstacle3_->SetyMax( 1.0);
     obstacle3_->SetyMin(-0.6);
 
 
@@ -319,7 +317,7 @@ void Game::SetupScene(void){
 
     obstacle7_->SetxMax( 0.3);
     obstacle7_->SetxMin(-0.3);
-    obstacle7_->SetyMax( 0.6);
+    obstacle7_->SetyMax( 1.0);
     obstacle7_->SetyMin(-0.6);
 
 
@@ -333,7 +331,7 @@ void Game::SetupScene(void){
 
     obstacle8_->SetxMax( 0.3);
     obstacle8_->SetxMin(-0.3);
-    obstacle8_->SetyMax( 0.6);
+    obstacle8_->SetyMax( 1.0);
     obstacle8_->SetyMin(-0.6);
 
 
@@ -347,7 +345,7 @@ void Game::SetupScene(void){
 
     obstacle9_->SetxMax( 0.3);
     obstacle9_->SetxMin(-0.3);
-    obstacle9_->SetyMax( 0.6);
+    obstacle9_->SetyMax( 1.0);
     obstacle9_->SetyMin(-0.6);
 
 
@@ -365,15 +363,16 @@ void Game::SetupScene(void){
     obstacle10_->SetyMin(-0.3);
 
 
+    //Coins
     coin1_ = new Obstacle("Coin1", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
     coin1_->SetPosition(glm::vec3(0.0, 0.6, -50.0));
     coin1_->SetScale(glm::vec3(0.3, 0.3, 0.6));
     coin1_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
     coin1_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
 
-    coin1_->SetxMax(0.3);
+    coin1_->SetxMax( 0.3);
     coin1_->SetxMin(-0.3);
-    coin1_->SetyMax(0.3);
+    coin1_->SetyMax( 0.3);
     coin1_->SetyMin(-0.3);
 
 
@@ -383,9 +382,9 @@ void Game::SetupScene(void){
     coin2_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
     coin2_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
 
-    coin2_->SetxMax(0.3);
+    coin2_->SetxMax( 0.3);
     coin2_->SetxMin(-0.3);
-    coin2_->SetyMax(0.3);
+    coin2_->SetyMax( 0.3);
     coin2_->SetyMin(-0.3);
 
 
@@ -395,9 +394,9 @@ void Game::SetupScene(void){
     coin3_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
     coin3_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
 
-    coin3_->SetxMax(0.3);
+    coin3_->SetxMax( 0.3);
     coin3_->SetxMin(-0.3);
-    coin3_->SetyMax(0.3);
+    coin3_->SetyMax( 0.3);
     coin3_->SetyMin(-0.3);
 
 
@@ -407,9 +406,9 @@ void Game::SetupScene(void){
     coin4_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
     coin4_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
 
-    coin4_->SetxMax(0.3);
+    coin4_->SetxMax( 0.3);
     coin4_->SetxMin(-0.3);
-    coin4_->SetyMax(0.3);
+    coin4_->SetyMax( 0.3);
     coin4_->SetyMin(-0.3);
 
 
@@ -419,10 +418,131 @@ void Game::SetupScene(void){
     coin5_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
     coin5_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
 
-    coin5_->SetxMax(0.3);
+    coin5_->SetxMax( 0.3);
     coin5_->SetxMin(-0.3);
-    coin5_->SetyMax(0.3);
+    coin5_->SetyMax( 0.3);
     coin5_->SetyMin(-0.3);
+
+
+    //Scenery
+    treeTrunk1_ = new Obstacle("treeTrunk1", resman_.GetResource("CylinderMesh"), resman_.GetResource("TexturedMaterial"));
+    treeTrunk1_->SetPosition(glm::vec3(-2.8, 1.0, -40.0));
+    treeTrunk1_->SetScale(glm::vec3(1.1, 4.5, 1.1));
+    treeTrunk1_->SetStartPoint(glm::vec3(-0.9, 0.6, -50.0));
+    treeTrunk1_->SetEndPoint(glm::vec3(-0.9, 0.6, 50.0));
+
+    treeTop1_ = CreateInstance("treeTop1", "SphereMesh", "TexturedMaterial");
+    treeTop1_->SetPosition(glm::vec3(0.0, 1.0, 0.0));
+    treeTop1_->SetScale(glm::vec3(1.7, 1.3, 2.2));
+    //treeTop1_->SetTexture(resman_.GetResource("TreeTexture"));
+
+
+    treeTrunk2_ = new Obstacle("treeTrunk2", resman_.GetResource("CylinderMesh"), resman_.GetResource("TexturedMaterial"));
+    treeTrunk2_->SetPosition(glm::vec3(2.3, 1.0, -70.0));
+    treeTrunk2_->SetScale(glm::vec3(1.1, 4.5, 1.1));
+    treeTrunk2_->SetStartPoint(glm::vec3(-0.9, 0.6, -50.0));
+    treeTrunk2_->SetEndPoint(glm::vec3(-0.9, 0.6, 50.0));
+
+    treeTop2_ = CreateInstance("treeTop2", "SphereMesh", "TexturedMaterial");
+    treeTop2_->SetPosition(glm::vec3(0.0, 1.0, 0.0));
+    treeTop2_->SetScale(glm::vec3(1.3, 1.7, 2.2));
+    //treeTop2_->SetTexture(resman_.GetResource("TreeTexture"));
+
+
+    treeTrunk3_ = new Obstacle("treeTrunk3", resman_.GetResource("CylinderMesh"), resman_.GetResource("TexturedMaterial"));
+    treeTrunk3_->SetPosition(glm::vec3(-3.0, 1.0, -90.0));
+    treeTrunk3_->SetScale(glm::vec3(1.1, 4.5, 1.1));
+    treeTrunk3_->SetStartPoint(glm::vec3(-0.9, 0.6, -50.0));
+    treeTrunk3_->SetEndPoint(glm::vec3(-0.9, 0.6, 50.0));
+
+    treeTop3_ = CreateInstance("treeTop3", "SphereMesh", "TexturedMaterial");
+    treeTop3_->SetPosition(glm::vec3(0.0, 1.0, 0.0));
+    treeTop3_->SetScale(glm::vec3(1.9, 1.3, 2.7));
+    //treeTop3_->SetTexture(resman_.GetResource("TreeTexture"));
+
+
+    treeTrunk4_ = new Obstacle("treeTrunk4", resman_.GetResource("CylinderMesh"), resman_.GetResource("TexturedMaterial"));
+    treeTrunk4_->SetPosition(glm::vec3(-2.8, 1.0, -120.0));
+    treeTrunk4_->SetScale(glm::vec3(1.1, 4.5, 1.1));
+    treeTrunk4_->SetStartPoint(glm::vec3(-0.9, 0.6, -50.0));
+    treeTrunk4_->SetEndPoint(glm::vec3(-0.9, 0.6, 50.0));
+
+    treeTop4_ = CreateInstance("treeTop4", "SphereMesh", "TexturedMaterial");
+    treeTop4_->SetPosition(glm::vec3(0.0, 1.0, 0.0));
+    treeTop4_->SetScale(glm::vec3(1.6, 1.1, 2.2));
+    //treeTop4_->SetTexture(resman_.GetResource("TreeTexture"));
+
+
+    treeTrunk5_ = new Obstacle("treeTrunk5", resman_.GetResource("CylinderMesh"), resman_.GetResource("TexturedMaterial"));
+    treeTrunk5_->SetPosition(glm::vec3(2.9, 1.0, -170.0));
+    treeTrunk5_->SetScale(glm::vec3(1.1, 4.5, 1.1));
+    treeTrunk5_->SetStartPoint(glm::vec3(-0.9, 0.6, -50.0));
+    treeTrunk5_->SetEndPoint(glm::vec3(-0.9, 0.6, 50.0));
+
+    treeTop5_ = CreateInstance("treeTop5", "SphereMesh", "TexturedMaterial");
+    treeTop5_->SetPosition(glm::vec3(0.0, 1.0, 0.0));
+    treeTop5_->SetScale(glm::vec3(1.7, 1.3, 2.2));
+    //treeTop5_->SetTexture(resman_.GetResource("TreeTexture"));
+
+
+    treeTrunk6_ = new Obstacle("treeTrunk6", resman_.GetResource("CylinderMesh"), resman_.GetResource("TexturedMaterial"));
+    treeTrunk6_->SetPosition(glm::vec3(-2.8, 1.0, -210.0));
+    treeTrunk6_->SetScale(glm::vec3(1.1, 4.5, 1.1));
+    treeTrunk6_->SetStartPoint(glm::vec3(-0.9, 0.6, -50.0));
+    treeTrunk6_->SetEndPoint(glm::vec3(-0.9, 0.6, 50.0));
+
+    treeTop6_ = CreateInstance("treeTop6", "SphereMesh", "TexturedMaterial");
+    treeTop6_->SetPosition(glm::vec3(0.0, 1.0, 0.0));
+    treeTop6_->SetScale(glm::vec3(1.7, 1.3, 2.2));
+    //treeTop6_->SetTexture(resman_.GetResource("TreeTexture"));
+
+
+    treeTrunk7_ = new Obstacle("treeTrunk7", resman_.GetResource("CylinderMesh"), resman_.GetResource("TexturedMaterial"));
+    treeTrunk7_->SetPosition(glm::vec3(2.3, 1.0, -250.0));
+    treeTrunk7_->SetScale(glm::vec3(1.1, 4.5, 1.1));
+    treeTrunk7_->SetStartPoint(glm::vec3(-0.9, 0.6, -50.0));
+    treeTrunk7_->SetEndPoint(glm::vec3(-0.9, 0.6, 50.0));
+
+    treeTop7_ = CreateInstance("treeTop7", "SphereMesh", "TexturedMaterial");
+    treeTop7_->SetPosition(glm::vec3(0.0, 1.0, 0.0));
+    treeTop7_->SetScale(glm::vec3(1.3, 1.7, 2.2));
+    treeTop7_->SetTexture(resman_.GetResource("TreeTexture"));
+
+
+    treeTrunk8_ = new Obstacle("treeTrunk8", resman_.GetResource("CylinderMesh"), resman_.GetResource("TexturedMaterial"));
+    treeTrunk8_->SetPosition(glm::vec3(-3.0, 1.0, -270.0));
+    treeTrunk8_->SetScale(glm::vec3(1.1, 4.5, 1.1));
+    treeTrunk8_->SetStartPoint(glm::vec3(-0.9, 0.6, -50.0));
+    treeTrunk8_->SetEndPoint(glm::vec3(-0.9, 0.6, 50.0));
+
+    treeTop8_ = CreateInstance("treeTop8", "SphereMesh", "TexturedMaterial");
+    treeTop8_->SetPosition(glm::vec3(0.0, 1.0, 0.0));
+    treeTop8_->SetScale(glm::vec3(1.9, 1.3, 2.7));
+    //treeTop8_->SetTexture(resman_.GetResource("TreeTexture"));
+
+
+    treeTrunk9_ = new Obstacle("treeTrunk9", resman_.GetResource("CylinderMesh"), resman_.GetResource("TexturedMaterial"));
+    treeTrunk9_->SetPosition(glm::vec3(-2.8, 1.0, -300.0));
+    treeTrunk9_->SetScale(glm::vec3(1.1, 4.5, 1.1));
+    treeTrunk9_->SetStartPoint(glm::vec3(-0.9, 0.6, -50.0));
+    treeTrunk9_->SetEndPoint(glm::vec3(-0.9, 0.6, 50.0));
+
+    treeTop9_ = CreateInstance("treeTop9", "SphereMesh", "TexturedMaterial");
+    treeTop9_->SetPosition(glm::vec3(0.0, 1.0, 0.0));
+    treeTop9_->SetScale(glm::vec3(1.6, 1.1, 2.2));
+    //treeTop9_->SetTexture(resman_.GetResource("TreeTexture"));
+
+
+    treeTrunk10_ = new Obstacle("treeTrunk10", resman_.GetResource("CylinderMesh"), resman_.GetResource("TexturedMaterial"));
+    treeTrunk10_->SetPosition(glm::vec3(2.9, 1.0, -330.0));
+    treeTrunk10_->SetScale(glm::vec3(1.1, 4.5, 1.1));
+    treeTrunk10_->SetStartPoint(glm::vec3(-0.9, 0.6, -50.0));
+    treeTrunk10_->SetEndPoint(glm::vec3(-0.9, 0.6, 50.0));
+
+    treeTop10_ = CreateInstance("treeTop10", "SphereMesh", "TexturedMaterial");
+    treeTop10_->SetPosition(glm::vec3(0.0, 1.0, 0.0));
+    treeTop10_->SetScale(glm::vec3(1.7, 1.3, 2.2));
+    //treeTop10_->SetTexture(resman_.GetResource("TreeTexture"));
 
     // === 4. BUILD SCENE HIERARCHY ===
     root_->AddChild(ground_plane_);
@@ -453,6 +573,27 @@ void Game::SetupScene(void){
     root_->AddChild(coin3_);
     root_->AddChild(coin4_);
     root_->AddChild(coin5_);
+
+    root_->AddChild(treeTrunk1_);
+    treeTrunk1_->AddChild(treeTop1_);
+    root_->AddChild(treeTrunk2_);
+    treeTrunk2_->AddChild(treeTop2_);
+    root_->AddChild(treeTrunk3_);
+    treeTrunk3_->AddChild(treeTop3_);
+    root_->AddChild(treeTrunk4_);
+    treeTrunk4_->AddChild(treeTop4_);
+    root_->AddChild(treeTrunk5_);
+    treeTrunk5_->AddChild(treeTop5_);
+    root_->AddChild(treeTrunk6_);
+    treeTrunk6_->AddChild(treeTop6_);
+    root_->AddChild(treeTrunk7_);
+    treeTrunk7_->AddChild(treeTop7_);
+    root_->AddChild(treeTrunk8_);
+    treeTrunk8_->AddChild(treeTop8_);
+    root_->AddChild(treeTrunk9_);
+    treeTrunk9_->AddChild(treeTop9_);
+    root_->AddChild(treeTrunk10_);
+    treeTrunk10_->AddChild(treeTop10_);
 
     scene_.SetRoot(root_);
 
@@ -504,16 +645,18 @@ void Game::MainLoop(void){
                 // INFINITE OBSTACLES - Respawn obstacles ahead when they go behind player!
                 if (player_root_) {
                     float playerZ = player_root_->GetPosition().z;
-                    float respawnDistance = 100.0f;  // Respawn 100 units ahead
+                    float respawnDistance = 200.0f;  // Respawn 100 units ahead
                     float despawnThreshold = 20.0f;  // Despawn when 20 units behind
 
                     // Check each obstacle and respawn if needed
                     Obstacle* obstacles[] = {obstacle1_, obstacle2_, obstacle3_, obstacle4_, obstacle5_,
                                             obstacle6_, obstacle7_, obstacle8_, obstacle9_, obstacle10_,
-                                            coin1_, coin2_, coin3_, coin4_, coin5_};
+                                            coin1_, coin2_, coin3_, coin4_, coin5_, 
+                                            treeTrunk1_, treeTrunk2_, treeTrunk3_, treeTrunk4_ , treeTrunk5_,
+                                            treeTrunk6_, treeTrunk7_, treeTrunk8_, treeTrunk9_ , treeTrunk10_};
                     float lanePositions[] = {-0.9f, 0.0f, 0.9f};  // Left, Center, Right
 
-                    for (int i = 0; i < 15; i++) {
+                    for (int i = 0; i < 25; i++) {
                         if (obstacles[i]) {
                             float obstacleZ = obstacles[i]->GetPosition().z;
 
@@ -533,7 +676,7 @@ void Game::MainLoop(void){
                                         std::cout << "GAME OVER\nYour final score is: " << player_root_->GetScore() << std::endl;
                                         //std::cout << "bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk\nbonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk\nbonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk\n";
                                     }
-                                    else {
+                                    else if (i <= 14) {
                                         player_root_->SetScore(obstacles[i]->GetScoreValue());
                                         //std::cout << "Player just scored 10pts!!!\n";
 
@@ -558,21 +701,30 @@ void Game::MainLoop(void){
                                     //std::cout << "obstacle1_ just despawned! obstacle1_ just despawned! obstacle1_ just despawned! obstacle1_ just despawned!\n";
                                 }
 
-                                // Randomly assign to a lane
-                                int randomLane = rand() % 3;
-                                float x = lanePositions[randomLane];
+                                if(i <= 14){
+                                    // Randomly assign to a lane
+                                    int randomLane = rand() % 3;
+                                    float x = lanePositions[randomLane];
 
-                                // Randomly choose full height or half height
-                                bool fullHeight = (rand() % 2 == 0);
-                                float y = fullHeight ? 0.6f : 0.3f;
-                                float scaleY = fullHeight ? 1.2f : 0.6f;
+                                    // Randomly choose full height or half height
+                                    bool fullHeight = (rand() % 2 == 0);
+                                    float y = fullHeight ? 0.6f : 0.3f;
+                                    float scaleY = fullHeight ? 1.2f : 0.6f;
 
-                                // Respawn ahead of player
-                                float newZ = playerZ - respawnDistance - (rand() % 50);
-                                obstacles[i]->SetPosition(glm::vec3(x, obstacles[i]->GetPosition()[1], newZ));
-                                //obstacles[i]->SetScale(glm::vec3(0.6f, scaleY, 0.6f)); //Suspecting this will cause frustration with setting up AABBs
-                                obstacles[i]->SetStartPoint(glm::vec3(x, obstacles[i]->GetPosition()[1], newZ));
-                                obstacles[i]->SetEndPoint(glm::vec3(x, obstacles[i]->GetPosition()[1], playerZ + 50.0f));
+                                    // Respawn ahead of player
+                                    float newZ = playerZ - respawnDistance - (rand() % 50);
+                                    obstacles[i]->SetPosition(glm::vec3(x, obstacles[i]->GetPosition().y, newZ));
+                                    //obstacles[i]->SetScale(glm::vec3(0.6f, scaleY, 0.6f)); //Suspecting this will cause frustration with setting up AABBs
+                                    obstacles[i]->SetStartPoint(glm::vec3(x, obstacles[i]->GetPosition().y, newZ));
+                                    obstacles[i]->SetEndPoint(glm::vec3(x, obstacles[i]->GetPosition().y, playerZ + 50.0f));
+                                }
+                                else {
+                                    int switchSides = (rand() % 2 == 1)?-1:1;
+                                    float newZ = playerZ - respawnDistance - (rand() % 50);
+                                    obstacles[i]->SetPosition(glm::vec3(switchSides * obstacles[i]->GetPosition().x, obstacles[i]->GetPosition().y, newZ));
+                                    obstacles[i]->SetStartPoint(glm::vec3(switchSides * obstacles[i]->GetPosition().x, obstacles[i]->GetPosition().y, newZ));
+                                    obstacles[i]->SetEndPoint(glm::vec3(switchSides * obstacles[i]->GetPosition().x, obstacles[i]->GetPosition().y, playerZ + 50.0f));
+                                }
                             }
                         }
                     }
@@ -604,6 +756,37 @@ void Game::KeyCallback(GLFWwindow* window, int key, int scancode, int action, in
     // Quit game if 'q' is pressed
     if (key == GLFW_KEY_Q && action == GLFW_PRESS){
         glfwSetWindowShouldClose(window, true);
+    }
+
+    if (key == GLFW_KEY_R && action == GLFW_PRESS) {
+        game->player_root_->SetShader(game->resman_.GetResource("TexturedMaterial"));
+        game->player_root_->SetTexture(game->resman_.GetResource("PlayerTexture"));
+        game->player_root_->Reset();
+
+        Obstacle* obstacles[] = { game->obstacle1_, game->obstacle2_, game->obstacle3_, game->obstacle4_, game->obstacle5_,
+                                  game->obstacle6_, game->obstacle7_, game->obstacle8_, game->obstacle9_, game->obstacle10_,
+                                  game->coin1_, game->coin2_, game->coin3_, game->coin4_, game->coin5_ };
+        float lanePositions[] = { -0.9f, 0.0f, 0.9f };
+        float playerZ = game->player_root_->GetPosition().z;
+        float respawnDistance = 200.0f;
+        for (int i = 0; i < 15; i++) {
+            // Randomly assign to a lane
+            int randomLane = rand() % 3;
+            float x = lanePositions[randomLane];
+
+            // Randomly choose full height or half height
+            bool fullHeight = (rand() % 2 == 0);
+            float y = fullHeight ? 0.6f : 0.3f;
+            float scaleY = fullHeight ? 1.2f : 0.6f;
+
+            // Respawn ahead of player
+            float newZ = playerZ - respawnDistance - (rand() % 50);
+            obstacles[i]->SetPosition(glm::vec3(x, obstacles[i]->GetPosition().y, newZ + (i * 30)));
+            obstacles[i]->SetStartPoint(glm::vec3(x, obstacles[i]->GetPosition().y, newZ + (i * 30)));
+            obstacles[i]->SetEndPoint(glm::vec3(x, obstacles[i]->GetPosition().y, playerZ + 50.0f));
+        }
+
+        game->animating_ = true;
     }
 
     // Stop animation if space bar is pressed

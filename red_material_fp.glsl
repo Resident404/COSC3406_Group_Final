@@ -5,9 +5,8 @@ in vec3 position_interp;
 in vec3 normal_interp;
 in vec3 light_pos;
 
-// Material attributes - BRIGHT RED for obstacles/containers
-vec4 ambient_color = vec4(0.3, 0.0, 0.0, 1.0);
-vec4 diffuse_color = vec4(1.0, 0.0, 0.0, 1.0);  // Pure red
+vec4 ambient_color = vec4(0.23, 0.16, 0.12, 1.0);
+vec4 diffuse_color = vec4(1.0, 0.0, 0.0, 1.0);
 vec4 specular_color = vec4(1.0, 0.3, 0.3, 1.0);
 float phong_exponent = 64.0;
 
