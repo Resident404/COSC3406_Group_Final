@@ -65,7 +65,7 @@ namespace game {
 		float yMax_;
 		float yMin_;
 
-		float forwardSpeed_ = 15.0f;
+		float forwardSpeed_ = 17.0f;
 		float forwardSpeedIncrease_ = 0.0025f;
 		float health_;	//Number of 'hits' before being caught.
 		int score_ = 0;	//Culmulative point total.

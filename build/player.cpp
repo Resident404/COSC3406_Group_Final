@@ -72,7 +72,7 @@ namespace game {
 		glm::vec3 currentPos = GetPosition();
 
 		// Smooth lane switching (interpolate X position)
-		float newX = currentPos.x + (targetX_ - currentPos.x) * 8.0f * deltaTime;
+		float newX = currentPos.x + (targetX_ - currentPos.x) * 15.0f * deltaTime;
 
 		// AUTOMATIC FORWARD MOVEMENT
 		forwardSpeed_ += forwardSpeedIncrease_;
