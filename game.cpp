@@ -868,7 +868,7 @@ void Game::KeyCallback(GLFWwindow* window, int key, int scancode, int action, in
     // === PLAYER CONTROLS ===
     if (game->player_root_) {
         // LEFT ARROW or A - Move to left lane
-        if ((key == GLFW_KEY_LEFT || key == GLFW_KEY_A) && action == GLFW_PRESS){
+        if ((key == GLFW_KEY_LEFT || key == GLFW_KEY_A || key == GLFW_KEY_J) && action == GLFW_PRESS){
             if (game->player_root_->currentLane_ > 0){
                 game->player_root_->currentLane_--;
                 //std::cout << "Moving to LEFT lane " << game->player_root_->currentLane_ << std::endl;
@@ -876,7 +876,7 @@ void Game::KeyCallback(GLFWwindow* window, int key, int scancode, int action, in
         }
 
         // RIGHT ARROW or D - Move to right lane
-        if ((key == GLFW_KEY_RIGHT || key == GLFW_KEY_D) && action == GLFW_PRESS){
+        if ((key == GLFW_KEY_RIGHT || key == GLFW_KEY_D || key == GLFW_KEY_L) && action == GLFW_PRESS){
             if (game->player_root_->currentLane_ < 2){
                 game->player_root_->currentLane_++;
                 //std::cout << "Moving to RIGHT lane " << game->player_root_->currentLane_ << std::endl;
@@ -884,7 +884,7 @@ void Game::KeyCallback(GLFWwindow* window, int key, int scancode, int action, in
         }
 
         // UP ARROW or W - Jump
-        if ((key == GLFW_KEY_UP || key == GLFW_KEY_W) && action == GLFW_PRESS){
+        if ((key == GLFW_KEY_UP || key == GLFW_KEY_W || key == GLFW_KEY_I) && action == GLFW_PRESS){
             if (!game->player_root_->isJumping_){
                 game->player_root_->isJumping_ = true;
                 game->player_root_->jumpStartTime_ = glfwGetTime();
@@ -893,11 +893,11 @@ void Game::KeyCallback(GLFWwindow* window, int key, int scancode, int action, in
         }
 
         // DOWN ARROW or S - Jump
-        if ((key == GLFW_KEY_DOWN || key == GLFW_KEY_S) && action == GLFW_PRESS) {
+        if ((key == GLFW_KEY_DOWN || key == GLFW_KEY_S || key == GLFW_KEY_K) && action == GLFW_PRESS) {
             if (!game->player_root_->isSliding_) {
                 game->player_root_->isSliding_ = true;
                 game->player_root_->slideStartTime_ = glfwGetTime();
-                std::cout << "SLIDE!" << std::endl;
+                //std::cout << "SLIDE!" << std::endl;
             }
         }
 
