@@ -231,7 +231,7 @@ void Game::SetupScene(void){
     obstacle1_->SetxMax( 0.3);
     obstacle1_->SetxMin(-0.3);
     obstacle1_->SetyMax( 1.0);
-    obstacle1_->SetyMin(-0.6);
+    obstacle1_->SetyMin(-0.9);
 
 
     // Obstacle 2: Center lane, full height
@@ -245,7 +245,7 @@ void Game::SetupScene(void){
     obstacle2_->SetxMax( 0.3);
     obstacle2_->SetxMin(-0.3);
     obstacle2_->SetyMax( 1.0);
-    obstacle2_->SetyMin(-0.6);
+    obstacle2_->SetyMin(-0.9);
 
 
     // Obstacle 3: Right lane, full height
@@ -259,7 +259,7 @@ void Game::SetupScene(void){
     obstacle3_->SetxMax( 0.3);
     obstacle3_->SetxMin(-0.3);
     obstacle3_->SetyMax( 1.0);
-    obstacle3_->SetyMin(-0.6);
+    obstacle3_->SetyMin(-0.9);
 
 
     // Obstacle 4: Center lane, HALF height - low jump
@@ -273,7 +273,7 @@ void Game::SetupScene(void){
     obstacle4_->SetxMax( 0.3);
     obstacle4_->SetxMin(-0.3);
     obstacle4_->SetyMax( 0.3);
-    obstacle4_->SetyMin(-0.3);
+    obstacle4_->SetyMin(-0.9);
 
 
     // Obstacle 5: Left lane, HALF height - low jump
@@ -287,7 +287,7 @@ void Game::SetupScene(void){
     obstacle5_->SetxMax( 0.3);
     obstacle5_->SetxMin(-0.3);
     obstacle5_->SetyMax( 0.3);
-    obstacle5_->SetyMin(-0.3);
+    obstacle5_->SetyMin(-0.9);
 
 
     // Obstacle 6: Right lane, HALF height - low jump
@@ -301,7 +301,7 @@ void Game::SetupScene(void){
     obstacle6_->SetxMax( 0.3);
     obstacle6_->SetxMin(-0.3);
     obstacle6_->SetyMax( 0.3);
-    obstacle6_->SetyMin(-0.3);
+    obstacle6_->SetyMin(-0.9);
 
 
     // Obstacle 7: Left lane, full height
@@ -315,7 +315,7 @@ void Game::SetupScene(void){
     obstacle7_->SetxMax( 0.3);
     obstacle7_->SetxMin(-0.3);
     obstacle7_->SetyMax( 1.0);
-    obstacle7_->SetyMin(-0.6);
+    obstacle7_->SetyMin(-0.9);
 
 
     // Obstacle 8: Center lane, full height
@@ -329,7 +329,7 @@ void Game::SetupScene(void){
     obstacle8_->SetxMax( 0.3);
     obstacle8_->SetxMin(-0.3);
     obstacle8_->SetyMax( 1.0);
-    obstacle8_->SetyMin(-0.6);
+    obstacle8_->SetyMin(-0.9);
 
 
     // Obstacle 9: Right lane, full height
@@ -343,7 +343,7 @@ void Game::SetupScene(void){
     obstacle9_->SetxMax( 0.3);
     obstacle9_->SetxMin(-0.3);
     obstacle9_->SetyMax( 1.0);
-    obstacle9_->SetyMin(-0.6);
+    obstacle9_->SetyMin(-0.9);
 
 
     // Obstacle 10: Center lane, HALF height - low jump
@@ -357,12 +357,81 @@ void Game::SetupScene(void){
     obstacle10_->SetxMax( 0.3);
     obstacle10_->SetxMin(-0.3);
     obstacle10_->SetyMax( 0.3);
-    obstacle10_->SetyMin(-0.3);
+    obstacle10_->SetyMin(-0.9);
 
+
+    // Obstacle 11: HALF height - Slide
+    obstacle11_ = new Obstacle("Obstacle11", resman_.GetResource("CubeMesh"), resman_.GetResource("TexturedMaterial"));
+    obstacle11_->SetPosition(glm::vec3(0.9, 0.8, -60.0));
+    obstacle11_->SetScale(glm::vec3(0.6, 0.6, 0.6));  // Half size
+    obstacle11_->SetStartPoint(glm::vec3(0.0, 0.6, -60.0));
+    obstacle11_->SetEndPoint(glm::vec3(0.0, 0.6, 50.0));
+    obstacle11_->SetTexture(resman_.GetResource("BuildingTexture"));
+
+    obstacle11_->SetxMax(0.3);
+    obstacle11_->SetxMin(-0.3);
+    obstacle11_->SetyMax(0.6);
+    obstacle11_->SetyMin(-0.3);
+
+
+    // Obstacle 12: HALF height - Slide
+    obstacle12_ = new Obstacle("Obstacle12", resman_.GetResource("CubeMesh"), resman_.GetResource("TexturedMaterial"));
+    obstacle12_->SetPosition(glm::vec3(0.0, 0.8, -120.0));
+    obstacle12_->SetScale(glm::vec3(0.6, 0.6, 0.6));  // Half size
+    obstacle12_->SetStartPoint(glm::vec3(0.0, 0.6, -120.0));
+    obstacle12_->SetEndPoint(glm::vec3(0.0, 0.6, 50.0));
+    obstacle12_->SetTexture(resman_.GetResource("BuildingTexture"));
+
+    obstacle12_->SetxMax(0.3);
+    obstacle12_->SetxMin(-0.3);
+    obstacle12_->SetyMax(0.6);
+    obstacle12_->SetyMin(-0.3);
+
+
+    // Obstacle 13: HALF height - Slide
+    obstacle13_ = new Obstacle("Obstacle13", resman_.GetResource("CubeMesh"), resman_.GetResource("TexturedMaterial"));
+    obstacle13_->SetPosition(glm::vec3(-0.9, 0.8, -180.0));
+    obstacle13_->SetScale(glm::vec3(0.6, 0.6, 0.6));  // Half size
+    obstacle13_->SetStartPoint(glm::vec3(0.0, 0.6, -180.0));
+    obstacle13_->SetEndPoint(glm::vec3(0.0, 0.6, 50.0));
+    obstacle13_->SetTexture(resman_.GetResource("BuildingTexture"));
+
+    obstacle13_->SetxMax(0.3);
+    obstacle13_->SetxMin(-0.3);
+    obstacle13_->SetyMax(0.6);
+    obstacle13_->SetyMin(-0.3);
+
+
+    // Obstacle 14: HALF height - Slide
+    obstacle14_ = new Obstacle("Obstacle14", resman_.GetResource("CubeMesh"), resman_.GetResource("TexturedMaterial"));
+    obstacle14_->SetPosition(glm::vec3(0.9, 0.8, -220.0));
+    obstacle14_->SetScale(glm::vec3(0.6, 0.6, 0.6));  // Half size
+    obstacle14_->SetStartPoint(glm::vec3(0.0, 0.6, -220.0));
+    obstacle14_->SetEndPoint(glm::vec3(0.0, 0.6, 50.0));
+    obstacle14_->SetTexture(resman_.GetResource("BuildingTexture"));
+
+    obstacle14_->SetxMax(0.3);
+    obstacle14_->SetxMin(-0.3);
+    obstacle14_->SetyMax(0.6);
+    obstacle14_->SetyMin(-0.3);
+
+
+    // Obstacle 15: HALF height - Slide
+    obstacle15_ = new Obstacle("Obstacle15", resman_.GetResource("CubeMesh"), resman_.GetResource("TexturedMaterial"));
+    obstacle15_->SetPosition(glm::vec3(0.0, 0.8, -270.0));
+    obstacle15_->SetScale(glm::vec3(0.6, 0.6, 0.6));  // Half size
+    obstacle15_->SetStartPoint(glm::vec3(0.0, 0.6, -270.0));
+    obstacle15_->SetEndPoint(glm::vec3(0.0, 0.6, 50.0));
+    obstacle15_->SetTexture(resman_.GetResource("BuildingTexture"));
+
+    obstacle15_->SetxMax(0.3);
+    obstacle15_->SetxMin(-0.3);
+    obstacle15_->SetyMax(0.6);
+    obstacle15_->SetyMin(-0.3);
 
     //Coins
     coin1_ = new Obstacle("Coin1", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
-    coin1_->SetPosition(glm::vec3(0.0, 0.6, -50.0));
+    coin1_->SetPosition(glm::vec3(0.0, 0.4, -50.0));
     coin1_->SetScale(glm::vec3(0.3, 0.3, 0.6));
     coin1_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
     coin1_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
@@ -374,7 +443,7 @@ void Game::SetupScene(void){
 
 
     coin2_ = new Obstacle("Coin2", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
-    coin2_->SetPosition(glm::vec3(0.9, 0.6, -80.0));
+    coin2_->SetPosition(glm::vec3(0.9, 0.4, -80.0));
     coin2_->SetScale(glm::vec3(0.3, 0.3, 0.6));
     coin2_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
     coin2_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
@@ -386,7 +455,7 @@ void Game::SetupScene(void){
 
 
     coin3_ = new Obstacle("Coin3", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
-    coin3_->SetPosition(glm::vec3(-0.9, 0.6, -110.0));
+    coin3_->SetPosition(glm::vec3(-0.9, 0.4, -110.0));
     coin3_->SetScale(glm::vec3(0.3, 0.3, 0.6));
     coin3_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
     coin3_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
@@ -398,7 +467,7 @@ void Game::SetupScene(void){
 
 
     coin4_ = new Obstacle("Coin4", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
-    coin4_->SetPosition(glm::vec3(-0.9, 0.6, -140.0));
+    coin4_->SetPosition(glm::vec3(-0.9, 0.4, -140.0));
     coin4_->SetScale(glm::vec3(0.3, 0.3, 0.6));
     coin4_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
     coin4_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
@@ -410,7 +479,7 @@ void Game::SetupScene(void){
 
 
     coin5_ = new Obstacle("Coin4", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
-    coin5_->SetPosition(glm::vec3(0.9, 0.6, -170.0));
+    coin5_->SetPosition(glm::vec3(0.9, 0.4, -170.0));
     coin5_->SetScale(glm::vec3(0.3, 0.3, 0.6));
     coin5_->SetStartPoint(glm::vec3(0.0, 0.3, -320.0));
     coin5_->SetEndPoint(glm::vec3(0.0, 0.3, 50.0));
@@ -563,6 +632,11 @@ void Game::SetupScene(void){
     root_->AddChild(obstacle8_);
     root_->AddChild(obstacle9_);
     root_->AddChild(obstacle10_);
+    root_->AddChild(obstacle11_);
+    root_->AddChild(obstacle12_);
+    root_->AddChild(obstacle13_);
+    root_->AddChild(obstacle14_);
+    root_->AddChild(obstacle15_);
 
     root_->AddChild(coin1_);
     root_->AddChild(coin2_);
@@ -646,12 +720,13 @@ void Game::MainLoop(void){
                     // Check each obstacle and respawn if needed
                     Obstacle* obstacles[] = {obstacle1_, obstacle2_, obstacle3_, obstacle4_, obstacle5_,
                                             obstacle6_, obstacle7_, obstacle8_, obstacle9_, obstacle10_,
+                                            obstacle11_, obstacle12_, obstacle13_, obstacle14_, obstacle15_,
                                             coin1_, coin2_, coin3_, coin4_, coin5_, 
                                             treeTrunk1_, treeTrunk2_, treeTrunk3_, treeTrunk4_ , treeTrunk5_,
                                             treeTrunk6_, treeTrunk7_, treeTrunk8_, treeTrunk9_ , treeTrunk10_};
                     float lanePositions[] = {-0.9f, 0.0f, 0.9f};  // Left, Center, Right
 
-                    for (int i = 0; i < 25; i++) {
+                    for (int i = 0; i < 30; i++) {
                         if (obstacles[i]) {
                             float obstacleZ = obstacles[i]->GetPosition().z;
 
@@ -664,14 +739,14 @@ void Game::MainLoop(void){
                             if (playerZ > obstacleZ && obstacleZ > playerZ - 0.5) {
                                 //std::cout << "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\nTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\nTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\n";
                                 if (AABBcheck(player_root_, obstacles[i])) {
-                                    if (i <= 9) {
+                                    if (i <= 14) {
                                         player_root_->SetGeometry(resman_.GetResource("SphereMesh"));
                                         player_root_->SetShader(resman_.GetResource("RedMaterial"));
                                         animating_ = false;
                                         std::cout << "GAME OVER\nYour final score is: " << player_root_->GetScore() << std::endl;
                                         //std::cout << "bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk\nbonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk\nbonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk - bonk\n";
                                     }
-                                    else if (i <= 14) {
+                                    else if (i <= 19) {
                                         player_root_->SetScore(obstacles[i]->GetScoreValue());
                                         //std::cout << "Player just scored 10pts!!!\n";
 
@@ -696,7 +771,7 @@ void Game::MainLoop(void){
                                     //std::cout << "obstacle1_ just despawned! obstacle1_ just despawned! obstacle1_ just despawned! obstacle1_ just despawned!\n";
                                 }
 
-                                if(i <= 14){
+                                if(i <= 19){
                                     // Randomly assign to a lane
                                     int randomLane = rand() % 3;
                                     float x = lanePositions[randomLane];
@@ -764,7 +839,7 @@ void Game::KeyCallback(GLFWwindow* window, int key, int scancode, int action, in
         float lanePositions[] = { -0.9f, 0.0f, 0.9f };
         float playerZ = game->player_root_->GetPosition().z;
         float respawnDistance = 200.0f;
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 19; i++) {
             // Randomly assign to a lane
             int randomLane = rand() % 3;
             float x = lanePositions[randomLane];
@@ -815,6 +890,16 @@ void Game::KeyCallback(GLFWwindow* window, int key, int scancode, int action, in
                 //std::cout << "JUMP!" << std::endl;
             }
         }
+
+        // DOWN ARROW or S - Jump
+        if ((key == GLFW_KEY_DOWN || key == GLFW_KEY_S) && action == GLFW_PRESS) {
+            if (!game->player_root_->isSliding_) {
+                game->player_root_->isSliding_ = true;
+                game->player_root_->slideStartTime_ = glfwGetTime();
+                std::cout << "SLIDE!" << std::endl;
+            }
+        }
+
     }
 }
 

@@ -72,7 +72,8 @@ namespace game {
             SceneNode *ground_plane_;
             SceneNode *lane_divider_1_, *lane_divider_2_;
 
-            Obstacle* obstacle1_, *obstacle2_, *obstacle3_, *obstacle4_, *obstacle5_, *obstacle6_, *obstacle7_, *obstacle8_, *obstacle9_, *obstacle10_;
+            Obstacle* obstacle1_, *obstacle2_, *obstacle3_, *obstacle4_, *obstacle5_, *obstacle6_, *obstacle7_, *obstacle8_, *obstacle9_, *obstacle10_,
+                      *obstacle11_, *obstacle12_, *obstacle13_, *obstacle14_, *obstacle15_;
 
             Obstacle *coin1_, *coin2_, *coin3_, *coin4_, *coin5_;
 

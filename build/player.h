@@ -78,5 +78,9 @@ namespace game {
 		float jumpStartTime_ = 0.0f;
 		float jumpHeight_ = 1.5f;
 		float jumpDuration_ = 0.6f;
+		bool isSliding_ = false;
+		float slideStartTime_ = 0.0f;
+		float slideHeight_ = 0.85f;
+		float slideDuration_ = 0.6f;
 	};
 }

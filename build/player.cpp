@@ -49,7 +49,7 @@ namespace game {
 
 	int Player::GetScore() { return score_; }
 	void Player::SetScore(int addScore) { score_ += addScore; }
-	void Player::Reset() { score_ = 0; forwardSpeed_ = 15.0f; }
+	void Player::Reset() { score_ = 0; forwardSpeed_ = 17.0f; isJumping_ = false; isSliding_ = false; }
 
 	void Player::SetxMax(float xMaxIn) { xMax_ = xMaxIn; }
 	float Player::GetxMax() { return xMax_; }
@@ -91,6 +91,24 @@ namespace game {
 			} else {
 				// Landing
 				isJumping_ = false;
+				newY = 0.5f;
+			}
+		}
+
+		if (isSliding_) {
+			double currentTime = glfwGetTime();
+			float timeSinceSlide = currentTime - slideStartTime_;
+
+			if (timeSinceSlide < slideDuration_) {
+				// Parabolic jump arc using sine wave
+				float t = timeSinceSlide / slideDuration_;
+				SetOrientation(glm::angleAxis(2*sin(t * glm::pi<float>()), glm::vec3(1.0,0.0,0.0)));
+				newY = 0.5f - slideHeight_ * sin(t * glm::pi<float>());
+			}
+			else {
+				// Landing
+				isSliding_ = false;
+				//SetOrientation(glm::angleAxis(glm::pi<float>()/2, glm::vec3(1.0, 0.0, 0.0)));
 				newY = 0.5f;
 			}
 		}
