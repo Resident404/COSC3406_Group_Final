@@ -439,7 +439,7 @@ void Game::SetupScene(void){
     coin1_->SetxMax( 0.3);
     coin1_->SetxMin(-0.3);
     coin1_->SetyMax( 0.3);
-    coin1_->SetyMin(-0.3);
+    coin1_->SetyMin(-0.6);
 
 
     coin2_ = new Obstacle("Coin2", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
@@ -451,7 +451,7 @@ void Game::SetupScene(void){
     coin2_->SetxMax( 0.3);
     coin2_->SetxMin(-0.3);
     coin2_->SetyMax( 0.3);
-    coin2_->SetyMin(-0.3);
+    coin2_->SetyMin(-0.6);
 
 
     coin3_ = new Obstacle("Coin3", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
@@ -463,7 +463,7 @@ void Game::SetupScene(void){
     coin3_->SetxMax( 0.3);
     coin3_->SetxMin(-0.3);
     coin3_->SetyMax( 0.3);
-    coin3_->SetyMin(-0.3);
+    coin3_->SetyMin(-0.6);
 
 
     coin4_ = new Obstacle("Coin4", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
@@ -475,7 +475,7 @@ void Game::SetupScene(void){
     coin4_->SetxMax( 0.3);
     coin4_->SetxMin(-0.3);
     coin4_->SetyMax( 0.3);
-    coin4_->SetyMin(-0.3);
+    coin4_->SetyMin(-0.6);
 
 
     coin5_ = new Obstacle("Coin4", resman_.GetResource("SphereMesh"), resman_.GetResource("ObjectMaterial"));
@@ -487,7 +487,7 @@ void Game::SetupScene(void){
     coin5_->SetxMax( 0.3);
     coin5_->SetxMin(-0.3);
     coin5_->SetyMax( 0.3);
-    coin5_->SetyMin(-0.3);
+    coin5_->SetyMin(-0.6);
 
 
     //Scenery
@@ -835,6 +835,7 @@ void Game::KeyCallback(GLFWwindow* window, int key, int scancode, int action, in
 
         Obstacle* obstacles[] = { game->obstacle1_, game->obstacle2_, game->obstacle3_, game->obstacle4_, game->obstacle5_,
                                   game->obstacle6_, game->obstacle7_, game->obstacle8_, game->obstacle9_, game->obstacle10_,
+                                  game->obstacle11_, game->obstacle12_, game->obstacle13_, game->obstacle14_, game->obstacle15_,
                                   game->coin1_, game->coin2_, game->coin3_, game->coin4_, game->coin5_ };
         float lanePositions[] = { -0.9f, 0.0f, 0.9f };
         float playerZ = game->player_root_->GetPosition().z;
